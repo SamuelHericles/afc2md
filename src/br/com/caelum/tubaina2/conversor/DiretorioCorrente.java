@@ -26,4 +26,8 @@ public class DiretorioCorrente {
 		return afcs;
 	}
 
+	public void criaArquivoMD(MarkDown md) throws IOException {
+		Files.write(md.path(), md.conteudo().getBytes());
+	}
+
 }
