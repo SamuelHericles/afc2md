@@ -1,0 +1,7 @@
+*.afc
+*.md
+build
+target
+bin
+*.class
+
