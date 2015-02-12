@@ -3,11 +3,39 @@ package br.com.caelum.tubaina2.conversor.logica;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeBox;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeCode;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeImg;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeIndex;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeInlineCode;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeItalico;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeLabel;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeRefLabel;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeSection;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeSintaxe;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeTitle;
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
 import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 
 public class ConversorMarkDown {
+	
+	private List<ConversorDeSintaxe> conversores = new ArrayList<>();
+	
+	public ConversorMarkDown() {
+		conversores.add(new ConversorDeTitle());
+		conversores.add(new ConversorDeSection());
+		conversores.add(new ConversorDeBox());
+		conversores.add(new ConversorDeCode());
+		conversores.add(new ConversorDeItalico());
+		conversores.add(new ConversorDeInlineCode());
+		conversores.add(new ConversorDeImg());
+		conversores.add(new ConversorDeIndex());
+		conversores.add(new ConversorDeLabel());
+		conversores.add(new ConversorDeRefLabel());
+	}
 	
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
@@ -18,22 +46,11 @@ public class ConversorMarkDown {
 	}
 
 	private String converteConteudo(String conteudoAFC) {
-		return conteudoAFC
-				.replaceAll("\\[title (.*)\\]", "### $1")
-				.replaceAll("\\[section (.*)\\]", "## $1")
-				.replaceAll("\\[box (.*)\\]", "> **$1**")
-				.replaceAll("\\[/box\\]", "")
-				.replaceAll("\\[code(.*)\\]", "```$1")
-				.replaceAll("\\[/code\\]", "```")
-				.replaceAll("(?s)\\:\\:(.*?)\\:\\:", "_$1_")
-				.replaceAll("(?s)%%(.*?)%%", "`$1`")
-				.replaceAll(
-						"\\[img (\\S+)[ ]?(w=[0-9]{1,3})?([ ]\"(.*)\")?\\]",
-						"![$4 {$2}]($1)")
-				.replaceAll("[ ]\\{\\}(\\]\\(.*\\))", "$1")
-				.replaceAll("\\[index .*\\]", "")
-				.replaceAll("\\[label .*\\]", "")
-				.replaceAll("\\[ref-label .*\\]", "");
+		String conteudoMD = conteudoAFC;
+		for (ConversorDeSintaxe conversor : conversores) {
+			conteudoMD = conversor.converte(conteudoMD);
+		}
+		return conteudoMD;
 	}
 
 }
