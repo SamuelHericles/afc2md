@@ -1,4 +1,4 @@
-package br.com.caelum.tubaina2.conversor;
+package br.com.caelum.tubaina2.conversor.logica;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.caelum.tubaina2.conversor.modelo.AFC;
+import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 
 public class DiretorioCorrente {
 

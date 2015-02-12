@@ -1,11 +1,14 @@
-package br.com.caelum.tubaina2.conversor;
+package br.com.caelum.tubaina2.conversor.logica;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConversorMarkDown {
+import br.com.caelum.tubaina2.conversor.modelo.AFC;
+import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 
+public class ConversorMarkDown {
+	
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
 		String conteudoMD = converteConteudo(conteudoAFC);
