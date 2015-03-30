@@ -2,7 +2,7 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeImg implements ConversorDeSintaxe {
 
-	private static final String REGEX_IMG = "\\[img (\\S+)[ ]?(w=[0-9]{1,3})?([ ]\"(.*)\")?\\]";
+	private static final String REGEX_IMG = "\\[img (\\S+)[ ]?(w=[0-9]{1,3}%?)?([ ]\"(.*)\")?\\]";
 	private static final String REGEX_EMPTY_WIDTH = "[ ]\\{\\}(\\]\\(.*\\))";
 	private static final String REPLACEMENT_IMG = "![$4 {$2}]($1)";
 	private static final String REPLACEMENT_EMPTY_WIDTH = "$1";
