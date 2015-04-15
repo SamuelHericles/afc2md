@@ -1,6 +1,7 @@
 package br.com.caelum.tubaina2.conversor.logica;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,11 +19,15 @@ public class DiretorioCorrente {
 	public List<AFC> buscarArquivosAFC() throws IOException {
 		List<AFC> afcs = new ArrayList<AFC>();
 
-		File[] files = diretorio.toFile().listFiles((dir, nome) -> nome.endsWith(".afc"));
+		File[] files = diretorio.toFile().listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String nome) {
+				return nome.endsWith(".afc");
+			}
+		});
+		
 		for (File file : files) {
 			Path path = Paths.get(file.getAbsolutePath());
 			String conteudo = new String(Files.readAllBytes(path));
-			
 			afcs.add(new AFC(path, conteudo));
 		}
 
