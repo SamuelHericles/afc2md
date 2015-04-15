@@ -5,8 +5,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeBox;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeChapter;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeCode;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeImg;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeIndex;
@@ -45,14 +48,17 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeNote());
 		conversores.add(new ConversorDeParagrafo());
 		conversores.add(new ConversorDeQuote());
+		conversores.add(new ConversorDeChapter());
 	}
 	
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
+		String titulo = recuperaTitulo(conteudoAFC);
 		String conteudoMD = converteConteudo(conteudoAFC);
-		Path pathMD = Paths.get(afc.path().toString().replace(".afc", ".md"));
 		
-		return new MarkDown(pathMD, conteudoMD);
+		Path pathMD = descobrePath(afc);
+		
+		return new MarkDown(pathMD, conteudoMD, titulo);
 	}
 
 	private String converteConteudo(String conteudoAFC) {
@@ -61,6 +67,20 @@ public class ConversorMarkDown {
 			conteudoMD = conversor.converte(conteudoMD);
 		}
 		return conteudoMD;
+	}
+
+	private String recuperaTitulo(String conteudo) {
+		Matcher matcher = Pattern.compile(ConversorDeChapter.REGEX_CHAPTER).matcher(conteudo);
+		matcher.find();
+		return matcher.group(1).trim();
+	}
+
+	private Path descobrePath(AFC afc) {
+		if(afc.isReadme()){
+			return afc.path().getParent().resolve("README.md");
+		} else {
+			return Paths.get(afc.path().toString().replace(".afc", ".md"));
+		}
 	}
 
 }

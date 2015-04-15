@@ -6,10 +6,12 @@ public class MarkDown {
 
 	private final Path path;
 	private final String conteudo;
+	private String titulo;
 
-	public MarkDown(Path path, String conteudo) {
+	public MarkDown(Path path, String conteudo, String titulo) {
 		this.path = path;
 		this.conteudo = conteudo;
+		this.titulo = titulo;
 	}
 
 	public Path path() {
@@ -18,6 +20,10 @@ public class MarkDown {
 	
 	public String conteudo() {
 		return conteudo;
+	}
+
+	public String titulo() {
+		return titulo;
 	}
 	
 }
