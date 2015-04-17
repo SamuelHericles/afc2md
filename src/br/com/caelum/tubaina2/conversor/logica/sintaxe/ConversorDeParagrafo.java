@@ -4,6 +4,10 @@ public class ConversorDeParagrafo implements ConversorDeSintaxe {
 
 	@Override
 	public String converte(String sintaxe) {
+		return trimEmTudoOQueNaoForCode(sintaxe);
+	}
+
+	public String trimEmTudoOQueNaoForCode(String sintaxe) {
 		String[] linhas = sintaxe.split("\\n");
 		StringBuffer sb = new StringBuffer();
 		boolean dentroDeCode = false;
