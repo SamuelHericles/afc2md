@@ -53,10 +53,11 @@ public class ConversorMarkDown {
 	
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
-		String titulo = recuperaTitulo(conteudoAFC);
-		String conteudoMD = converteConteudo(conteudoAFC);
 		
+		String titulo = descobreTitulo(conteudoAFC);
 		Path pathMD = descobrePath(afc);
+
+		String conteudoMD = converteConteudo(conteudoAFC);
 		
 		return new MarkDown(pathMD, conteudoMD, titulo);
 	}
@@ -69,10 +70,14 @@ public class ConversorMarkDown {
 		return conteudoMD;
 	}
 
-	private String recuperaTitulo(String conteudo) {
+	private String descobreTitulo(String conteudo) {
 		Matcher matcher = Pattern.compile(ConversorDeChapter.REGEX_CHAPTER).matcher(conteudo);
 		matcher.find();
-		return matcher.group(1).trim();
+		String titulo = matcher.group(1);
+		if(titulo != null && !titulo.isEmpty()) {
+			return titulo.trim();
+		} 
+		return "Capítulo sem título";
 	}
 
 	private Path descobrePath(AFC afc) {
