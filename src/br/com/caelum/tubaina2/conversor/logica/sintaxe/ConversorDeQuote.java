@@ -1,12 +1,14 @@
 package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
-import java.util.regex.Pattern;
 
 public class ConversorDeQuote implements ConversorDeSintaxe {
 
+	private static final String REGEX_QUOTE = "\\[(?is)QUOTE (.*?)\\]";
+	private static final String REPLACEMENT_QUOTE = "_$1_";
+
 	@Override
 	public String converte(String sintaxe) {
-		return Pattern.compile("\\[(?is)QUOTE (.*?)\\]").matcher(sintaxe).replaceAll("_$1_");
+		return sintaxe.replaceAll(REGEX_QUOTE, REPLACEMENT_QUOTE);
 	}
 
 }
