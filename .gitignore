@@ -4,4 +4,4 @@ build
 target
 bin
 *.class
-
+/test-classes

@@ -2,7 +2,7 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeTitle implements ConversorDeSintaxe {
 
-	private static final String REGEX_TITLE = "\\[title (.*)\\]";
+	private static final String REGEX_TITLE = "\\[(?is)TITLE (.*)\\]";
 	private static final String REPLACEMENT_TITLE = "### $1";
 	
 	@Override
