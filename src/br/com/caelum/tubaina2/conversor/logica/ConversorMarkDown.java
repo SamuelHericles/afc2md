@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeBox;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeChapter;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeCode;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeExercise;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeImg;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeIndex;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeInlineCode;
@@ -19,6 +20,7 @@ import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeLabel;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeList;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeNote;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeParagrafo;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeQuestion;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeQuote;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeRefLabel;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeSection;
@@ -49,6 +51,8 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeParagrafo());
 		conversores.add(new ConversorDeQuote());
 		conversores.add(new ConversorDeChapter());
+		conversores.add(new ConversorDeQuestion());
+		conversores.add(new ConversorDeExercise());
 	}
 	
 	public MarkDown converte(AFC afc) throws IOException {

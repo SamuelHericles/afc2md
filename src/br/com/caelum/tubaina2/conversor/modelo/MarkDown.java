@@ -6,8 +6,8 @@ public class MarkDown {
 
 	private final Path path;
 	private final String conteudo;
-	private String titulo;
-
+	private final String titulo;
+	
 	public MarkDown(Path path, String conteudo, String titulo) {
 		this.path = path;
 		this.conteudo = conteudo;
