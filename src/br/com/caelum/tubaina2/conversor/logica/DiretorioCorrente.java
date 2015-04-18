@@ -21,23 +21,31 @@ public class DiretorioCorrente {
 	public List<AFC> buscarArquivosAFC() throws IOException {
 		List<AFC> afcs = new ArrayList<AFC>();
 
+		File[] files = buscaFilesAFC();
+		
+		criaAFCs(afcs, files);
+
+		identificaReadme(afcs);
+		
+		return afcs;
+	}
+
+	public File[] buscaFilesAFC() {
 		File[] files = diretorio.toFile().listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String nome) {
 				return nome.endsWith(".afc");
 			}
 		});
-		
+		return files;
+	}
+	
+	public void criaAFCs(List<AFC> afcs, File[] files) throws IOException {
 		for (File file : files) {
 			Path path = Paths.get(file.getAbsolutePath());
 			String conteudo = new String(Files.readAllBytes(path));
 			afcs.add(new AFC(path, conteudo));
 		}
-
 		ordenaPorPath(afcs);
-		
-		identificaReadme(afcs);
-		
-		return afcs;
 	}
 
 	public void criaArquivoMD(MarkDown md) throws IOException {
