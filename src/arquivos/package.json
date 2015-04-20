@@ -1,7 +1,7 @@
 {
-  "name": "livro",
+  "name": "apostila",
   "version": "0.0.1",
-  "description": "livro",
+  "description": "apostila",
   "private": true,
   "dependencies": {
     "gitbook-plugin-cdc": "git+ssh://git@github.com:casadocodigo/gitbook-plugin-cdc.git"

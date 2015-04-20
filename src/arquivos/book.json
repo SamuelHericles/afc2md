@@ -1,11 +1,11 @@
 {
-	"title": "Título do Livro",
+	"title": "Título da Apostila",
 	
-	"description": "Descrição do Livro",
+	"description": "Descrição da Apostila",
 	
-	"author": "Fulano Silva & Sicrano Souza",
+	"author": "Autor1 da Apostila & Autor2 da Apostila",
 
-	"publisher": "Publicador",
+	"publisher": "Caelum",
 	
 	"pdf": {
 		"margin": {
