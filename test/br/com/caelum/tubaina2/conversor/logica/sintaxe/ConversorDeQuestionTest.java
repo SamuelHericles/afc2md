@@ -7,11 +7,11 @@ import org.junit.Test;
 public class ConversorDeQuestionTest {
 
 	private static final String TEXTO_QUESTAO = "\t\tEntre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n";
-	private ConversorDeSintaxe convesor;
+	private ConversorDeSintaxe conversor;
 
 	@Before
 	public void setUp() {
-		convesor = new ConversorDeQuestion();
+		conversor = new ConversorDeQuestion();
 	}
 
 	@Test
@@ -19,7 +19,7 @@ public class ConversorDeQuestionTest {
 		String questao = "[question]\n"+
 						 TEXTO_QUESTAO+
 						 "[/question]\n";
-		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", convesor.converte(questao));
+		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", conversor.converte(questao));
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class ConversorDeQuestionTest {
 		String questao = "[QUESTION]\n"+
 				 TEXTO_QUESTAO+
 				 "[/QUESTION]\n";
-		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", convesor.converte(questao));
+		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", conversor.converte(questao));
 	}
 
 }

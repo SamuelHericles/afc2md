@@ -10,11 +10,11 @@ public class ConversorDeExerciseTest {
 												+ "Substitua o %%selectOneMenu>%% na tela de adição de itens na nota fiscal\n"
 												+ " pelo componente de Autocomplete do primefaces.\n"
 												+ "[/question]";
-	private ConversorDeSintaxe convesor;
+	private ConversorDeSintaxe conversor;
 
 	@Before
 	public void setUp() {
-		convesor = new ConversorDeExercise();
+		conversor = new ConversorDeExercise();
 	}
 
 	@Test
@@ -22,7 +22,7 @@ public class ConversorDeExerciseTest {
 		String exercicio = "[exercise]\n"+
 							QUESTOES+
 							"[/exercise]\n";
-		Assert.assertEquals("\n"+QUESTOES+"\n", convesor.converte(exercicio));
+		Assert.assertEquals("\n"+QUESTOES+"\n", conversor.converte(exercicio));
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class ConversorDeExerciseTest {
 		String exercicio = "[EXERCISE]\n"+
 							 QUESTOES+
 							"[/EXERCISE]\n";
-		Assert.assertEquals("\n"+QUESTOES+"\n", convesor.converte(exercicio));
+		Assert.assertEquals("\n"+QUESTOES+"\n", conversor.converte(exercicio));
 	}
 
 }
