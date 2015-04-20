@@ -13,6 +13,7 @@ import java.util.List;
 
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
 import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
+import br.com.caelum.tubaina2.conversor.modelo.Summary;
 
 public class Diretorio {
 
@@ -54,6 +55,12 @@ public class Diretorio {
 
 	public void criaArquivoMD(MarkDown md) throws IOException {
 		Files.write(md.path(), md.conteudo().getBytes());
+	}
+	
+	public void criaSummaryMD(Summary summary) throws IOException{
+		Path path = diretorio.resolve("SUMMARY.md");
+		MarkDown summaryMD = new MarkDown(path, summary.conteudo(), "Sumário");
+		criaArquivoMD(summaryMD);
 	}
 
 	private void ordenaPorPath(List<AFC> afcs) {

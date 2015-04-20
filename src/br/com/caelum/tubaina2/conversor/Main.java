@@ -23,7 +23,7 @@ public class Main {
 			diretorio.criaArquivoMD(md);
 		}
 
-		diretorio.criaArquivoMD(summary.emMd());
+		diretorio.criaSummaryMD(summary);
 	}
 
 	public static String obtemArgumentoDeDiretorio(String[] args) {

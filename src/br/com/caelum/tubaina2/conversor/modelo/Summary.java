@@ -1,7 +1,6 @@
 package br.com.caelum.tubaina2.conversor.modelo;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Summary {
 
@@ -17,8 +16,7 @@ public class Summary {
 		return "* ["+titulo+"]("+fileName+")\n";
 	}
 	
-	public MarkDown emMd(){
-		Path path = Paths.get("SUMMARY.md");
-		return new MarkDown(path, conteudo.toString(), "Sumário");
+	public String conteudo() {
+		return conteudo.toString();
 	}
 }
