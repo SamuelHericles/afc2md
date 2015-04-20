@@ -3,7 +3,7 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeQuote implements ConversorDeSintaxe {
 
-	private static final String REGEX_QUOTE = "\\[(?is)QUOTE (.*?)\\]";
+	private static final String REGEX_QUOTE = "(?is)\\[QUOTE\\s+(.*?)\\]";
 	private static final String REPLACEMENT_QUOTE = "_$1_";
 
 	@Override
