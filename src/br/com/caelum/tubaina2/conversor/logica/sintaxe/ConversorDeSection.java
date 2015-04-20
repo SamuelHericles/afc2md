@@ -2,7 +2,7 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeSection implements ConversorDeSintaxe {
 
-	private static final String REGEX_SECTION = "\\[(?is)SECTION (.*?)\\]";
+	private static final String REGEX_SECTION = "(?is)\\[SECTION\\s+(.*?)\\]";
 	private static final String REPLACEMENT_SECTION = "## $1";
 	
 	@Override
