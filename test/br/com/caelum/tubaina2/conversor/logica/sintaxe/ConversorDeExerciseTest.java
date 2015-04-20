@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class ConversorDeExerciseTest {
 
-	private static final String TEXTO_EXERCICIO = "[question]\n"
-												+ "Substitua o `<h:selectOneMenu>` na tela de adição de itens na nota fiscal\n"
+	private static final String QUESTOES = "[question]\n"
+												+ "Substitua o %%selectOneMenu>%% na tela de adição de itens na nota fiscal\n"
 												+ " pelo componente de Autocomplete do primefaces.\n"
 												+ "[/question]";
 	private ConversorDeSintaxe convesor;
@@ -19,18 +19,18 @@ public class ConversorDeExerciseTest {
 
 	@Test
 	public void emUmaLinha() {
-		String questao = "[exercise]\n"+
-						 TEXTO_EXERCICIO+
-						 "[/exercise]\n";
-		Assert.assertEquals("\n"+TEXTO_EXERCICIO+"\n", convesor.converte(questao));
+		String exercicio = "[exercise]\n"+
+							QUESTOES+
+							"[/exercise]\n";
+		Assert.assertEquals("\n"+QUESTOES+"\n", convesor.converte(exercicio));
 	}
 
 	@Test
 	public void maiusculo() {
-		String questao = "[EXERCISE]\n"+
-				 TEXTO_EXERCICIO+
-				 "[/EXERCISE]\n";
-		Assert.assertEquals("\n"+TEXTO_EXERCICIO+"\n", convesor.converte(questao));
+		String exercicio = "[EXERCISE]\n"+
+							 QUESTOES+
+							"[/EXERCISE]\n";
+		Assert.assertEquals("\n"+QUESTOES+"\n", convesor.converte(exercicio));
 	}
 
 }
