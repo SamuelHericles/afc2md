@@ -14,9 +14,13 @@ import java.util.List;
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
 import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 
-public class DiretorioCorrente {
+public class Diretorio {
 
-	private Path diretorio = Paths.get("").toAbsolutePath();
+	private final Path diretorio;
+
+	public Diretorio(String dir) {
+		diretorio = Paths.get(dir).toAbsolutePath();
+	}
 
 	public List<AFC> buscarArquivosAFC() throws IOException {
 		List<AFC> afcs = new ArrayList<AFC>();

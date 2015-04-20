@@ -3,7 +3,7 @@ package br.com.caelum.tubaina2.conversor;
 import java.util.List;
 
 import br.com.caelum.tubaina2.conversor.logica.ConversorMarkDown;
-import br.com.caelum.tubaina2.conversor.logica.DiretorioCorrente;
+import br.com.caelum.tubaina2.conversor.logica.Diretorio;
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
 import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 import br.com.caelum.tubaina2.conversor.modelo.Summary;
@@ -11,7 +11,8 @@ import br.com.caelum.tubaina2.conversor.modelo.Summary;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		DiretorioCorrente diretorio = new DiretorioCorrente();
+		
+		Diretorio diretorio = new Diretorio(obtemArgumentoDeDiretorio(args));
 		ConversorMarkDown conversor = new ConversorMarkDown();
 		Summary summary = new Summary();
 		
@@ -23,6 +24,14 @@ public class Main {
 		}
 
 		diretorio.criaArquivoMD(summary.emMd());
+	}
+
+	public static String obtemArgumentoDeDiretorio(String[] args) {
+		String diretorio = "";
+		if (args.length >= 2 && "-d".equals(args[0])) {
+			diretorio = args[1]; 
+		}
+		return diretorio;
 	}
 
 
