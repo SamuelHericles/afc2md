@@ -4,10 +4,10 @@ public class ConversorDeCode implements ConversorDeSintaxe {
 
 	private static final String REGEX_ABERTURA_CODE = "\\[code(.*)\\]";
 	private static final String REGEX_FECHAMENTO_CODE = "\\[/code\\]";
-	private static final String REGEX_HIGHLIGHT = "h=(.*)";
+	private static final String REGEX_HIGHLIGHT = "```(.*) h=.*";
 	private static final String REPLACEMENT_ABERTURA_CODE = "```$1";
 	private static final String REPLACEMENT_FECHAMENTO_CODE = "```";
-	private static final String REPLACEMENT_HIGHLIGHT = "";
+	private static final String REPLACEMENT_HIGHLIGHT = "```$1";
 
 	@Override
 	public String converte(String sintaxe) {

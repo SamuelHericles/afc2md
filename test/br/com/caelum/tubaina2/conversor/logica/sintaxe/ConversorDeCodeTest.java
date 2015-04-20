@@ -1,0 +1,90 @@
+package br.com.caelum.tubaina2.conversor.logica.sintaxe;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ConversorDeCodeTest {
+
+	private ConversorDeSintaxe conversor;
+
+	@Before
+	public void setUp() {
+		conversor = new ConversorDeCode();
+	}
+
+	@Test
+	public void deveManterLinguagem() {
+		String codigo = "[code java]\n" +
+						"	public class Main {\n" +
+						"		public static void main(String... args){}\n" +
+						"	}\n" +
+						"[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado = 	"``` java\n" +
+							"	public class Main {\n" +
+							"		public static void main(String... args){}\n" +
+							"	}\n" +
+							"```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void deveRemoverHighlightQueForAtributoDeCode() {
+		String codigo = "[code java h=3]\n" +
+						"	public class UsuarioDao {\n" +
+						"		@PersistenceContext\n" +
+						"		private EntityManager manager;\n" +
+						"	}\n" +
+						"[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado = "``` java\n" +
+						"	public class UsuarioDao {\n" +
+						"		@PersistenceContext\n" +
+						"		private EntityManager manager;\n" +
+						"	}\n" +
+						"```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void naoDeveRemoverHighlightForaDeCode() {
+		String trecho = "O namespace padrão dos componentes JSF é "
+						+ "%%xmlns:h=\"http://java.sun.com/jsf/html\"%% e "
+						+ "%%xmlns:f=\"http://java.sun.com/jsf/core\"%%.\n";
+		
+		String convertido = conversor.converte(trecho);
+		
+		Assert.assertEquals(trecho, convertido);
+	}
+
+	@Test
+	public void naoDeveRemoverHighlightQueEstiverDentroDeCode() {
+		String codigo = "	[code html]\n"+
+						"		<html xmlns=\"http://www.w3.org/1999/xhtml\"\n"+
+						"		      xmlns:ui=\"http://java.sun.com/jsf/facelets\"\n"+
+						"		      xmlns:h=\"http://java.sun.com/jsf/html\"\n"+
+						"		      xmlns:f=\"http://java.sun.com/jsf/core\">\n"+
+						"		</html>\n"+
+						"	[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado =   "	``` html\n"+
+							"		<html xmlns=\"http://www.w3.org/1999/xhtml\"\n"+
+							"		      xmlns:ui=\"http://java.sun.com/jsf/facelets\"\n"+
+							"		      xmlns:h=\"http://java.sun.com/jsf/html\"\n"+
+							"		      xmlns:f=\"http://java.sun.com/jsf/core\">\n"+
+							"		</html>\n"+
+							"	```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+}
