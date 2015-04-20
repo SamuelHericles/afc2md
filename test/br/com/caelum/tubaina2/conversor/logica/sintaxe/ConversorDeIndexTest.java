@@ -9,42 +9,53 @@ public class ConversorDeIndexTest {
 	private static final String TEXTO = "[img imagens/servlets/http.png w=50%]"
 										+ "O comportamento das servlets que vamos ver neste capítulo foi definido na classe"
 										+ " %%HttpServlet%% do pacote %%javax.servlet%%.";
-	private ConversorDeSintaxe convesor;
+	private ConversorDeSintaxe conversor;
 
 	@Before
 	public void setUp() {
-		convesor = new ConversorDeIndex();
+		conversor = new ConversorDeIndex();
 	}
 
 	@Test
 	public void emUmaLinha() {
-		Assert.assertEquals("", convesor.converte("[index Managed Bean]"));
+		Assert.assertEquals("", conversor.converte("[index Managed Bean]"));
 	}
 
 	@Test
 	public void maiusculo() {
-		Assert.assertEquals("", convesor.converte("[INDEX Cabeçalho da nota fiscal]"));
+		Assert.assertEquals("", conversor.converte("[INDEX Cabeçalho da nota fiscal]"));
 	}
 
 	@Test
 	public void emMaisDeUmaLinha() {
-		Assert.assertEquals("", convesor.converte("[index Branches por etapa\n de desenvolvimento]"));
+		Assert.assertEquals("", conversor.converte("[index Branches por etapa\n de desenvolvimento]"));
 	}
 
 	@Test
 	public void variosNaMesmaLinha() {
-		Assert.assertEquals("", convesor.converte("[index Request][index Response]"));
+		Assert.assertEquals("", conversor.converte("[index Request][index Response]"));
 	}
 
 	@Test
 	public void variosEmVariasLinhas() {
-		Assert.assertEquals("\n", convesor.converte("[index Request]\n[index Response]"));
+		Assert.assertEquals("\n", conversor.converte("[index Request]\n[index Response]"));
 	}
 	
 	@Test
 	public void variosEmVariasLinhasComTextoNoMeio() {
-		Assert.assertEquals("\n"+TEXTO, convesor.converte("[index HTTP]\n"
+		Assert.assertEquals("\n"+TEXTO, conversor.converte("[index HTTP]\n"
 													+ TEXTO
 													+ "[index HttpServlet]"));
 	}
+	
+	@Test
+	public void comEspacosNaFrente() {
+		Assert.assertEquals("", conversor.converte("[index         Propriedades de Breakpoint]"));
+	}
+	
+	@Test
+	public void comQuebraDeLinhasTabsEEspacosNaFrente() {
+		Assert.assertEquals("", conversor.converte("[index\n  \t\t   \n    Propriedades de Breakpoint]"));
+	}
+	
 }
