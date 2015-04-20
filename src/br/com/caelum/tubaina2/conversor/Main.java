@@ -26,6 +26,10 @@ public class Main {
 		}
 
 		diretorio.criaSummaryMD(summary);
+		
+		diretorio.copiaArquivosEstaticos();
+		
+		System.out.println("Arquivos afc convertidos para md com sucesso.");
 	}
 
 	public static String obtemArgumentoDeDiretorio(String[] args) {
