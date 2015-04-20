@@ -6,31 +6,36 @@ import org.junit.Test;
 
 public class ConversorDeChapterTest {
 
-	private ConversorDeSintaxe convesor;
+	private ConversorDeSintaxe conversor;
 
 	@Before
 	public void setUp() {
-		convesor = new ConversorDeChapter();
+		conversor = new ConversorDeChapter();
 	}
 
 	@Test
 	public void emUmaLinha() {
-		Assert.assertEquals("", convesor.converte("[chapter Eclipse IDE]"));
+		Assert.assertEquals("", conversor.converte("[chapter Eclipse IDE]"));
 	}
 
 	@Test
 	public void maiusculo() {
-		Assert.assertEquals("", convesor.converte("[CHAPTER Templates com Facelets]"));
+		Assert.assertEquals("", conversor.converte("[CHAPTER Templates com Facelets]"));
 	}
 
 	@Test
 	public void emMaisDeUmaLinha() {
-		Assert.assertEquals("", convesor.converte("[chapter Apêndice\n - Problemas com concorrência]"));
+		Assert.assertEquals("", conversor.converte("[chapter Apêndice\n - Problemas com concorrência]"));
 	}
 	
 	@Test
-	public void comEspacos() {
-		Assert.assertEquals("", convesor.converte("[chapter            Apêndice\n -  Problemas com concorrência]"));
+	public void comEspacosNaFrente() {
+		Assert.assertEquals("", conversor.converte("[chapter            Ajax com JSF 2]"));
 	}
-	
+
+	@Test
+	public void comQuebraDeLinhaTabsEEspacosNaFrente() {
+		Assert.assertEquals("", conversor.converte("[chapter\n   \t\t \n   Apêndice - Internacionalização: sua aplicação em várias línguas]"));
+	}
+
 }
