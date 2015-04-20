@@ -17,6 +17,8 @@ public class Main {
 		Summary summary = new Summary();
 		
 		List<AFC> afcs = diretorio.buscarArquivosAFC();
+		verificaSeEncontrouAFCs(diretorio, afcs);
+		
 		for (AFC afc : afcs) {
 			MarkDown md = conversor.converte(afc);
 			summary.adiciona(md);
@@ -34,5 +36,12 @@ public class Main {
 		return diretorio;
 	}
 
+	public static void verificaSeEncontrouAFCs(Diretorio diretorio, List<AFC> afcs) {
+		if(afcs.isEmpty()){
+			System.err.println("Não foi encontrado nenhum arquivo .afc no diretório: " + diretorio.toString());
+			System.err.println("Considere utilizar a opção: -d [diretório]");
+			System.exit(1);
+		}
+	}
 
 }
