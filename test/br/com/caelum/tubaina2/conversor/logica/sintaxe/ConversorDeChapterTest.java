@@ -25,8 +25,12 @@ public class ConversorDeChapterTest {
 
 	@Test
 	public void emMaisDeUmaLinha() {
-		Assert.assertEquals("", convesor.converte("[chapter  Apêndice\n - Problemas com concorrência]"));
+		Assert.assertEquals("", convesor.converte("[chapter Apêndice\n - Problemas com concorrência]"));
 	}
 	
+	@Test
+	public void comEspacos() {
+		Assert.assertEquals("", convesor.converte("[chapter            Apêndice\n -  Problemas com concorrência]"));
+	}
 	
 }
