@@ -30,6 +30,8 @@ public class Diretorio {
 		
 		criaAFCs(afcs, files);
 
+		ordenaPorPath(afcs);
+
 		identificaReadme(afcs);
 		
 		return afcs;
@@ -50,7 +52,6 @@ public class Diretorio {
 			String conteudo = new String(Files.readAllBytes(path));
 			afcs.add(new AFC(path, conteudo));
 		}
-		ordenaPorPath(afcs);
 	}
 
 	public void criaArquivoMD(MarkDown md) throws IOException {
@@ -58,8 +59,8 @@ public class Diretorio {
 	}
 	
 	public void criaSummaryMD(Summary summary) throws IOException{
-		Path path = diretorio.resolve("SUMMARY.md");
-		MarkDown summaryMD = new MarkDown(path, summary.conteudo(), "Sumário");
+		Path path = diretorio.resolve(Summary.NOME_MD);
+		MarkDown summaryMD = new MarkDown(path, summary.conteudo(), Summary.TITULO_MD);
 		criaArquivoMD(summaryMD);
 	}
 
@@ -77,4 +78,8 @@ public class Diretorio {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return diretorio.toString();
+	}
 }

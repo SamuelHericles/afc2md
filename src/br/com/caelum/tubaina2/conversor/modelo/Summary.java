@@ -4,6 +4,9 @@ import java.nio.file.Path;
 
 public class Summary {
 
+	public static final String NOME_MD = "SUMMARY.md";
+	public static final String TITULO_MD = "Sumário";
+
 	private StringBuilder conteudo = new StringBuilder();
 	
 	public void adiciona(MarkDown md){
