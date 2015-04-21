@@ -1,0 +1,37 @@
+[chapter O que é Java]
+
+[section Exercícios: Modificando o Hello World]
+
+[exercise]
+	[question]
+		Altere seu programa para imprimir uma mensagem diferente.
+		[answer]
+		[code java]
+			class MeuProgramaModificado {
+				public static void main(String[] args) {
+					// miolo do programa começa aqui!	
+					System.out.println("Uma mensagem diferente.");
+					// fim do miolo do programa	
+				}
+			}
+		[/code]
+		[/answer]
+	[/question]
+	[question]
+		Altere seu programa para imprimir duas linhas de texto usando duas linhas de código System.out.
+		[answer]
+		[code java]
+			class MeuProgramaModificado {
+				public static void main(String[] args) {
+					System.out.println("Uma mensagem.");
+					System.out.println("Outra mensagem.");
+				}
+			}
+		[/code]
+		[/answer]
+	[/question]
+	[question]
+		Sabendo que os caracteres %%\n%% representam uma quebra de linhas, imprima duas linhas de texto 
+		usando uma única linha de código %%System.out%%.
+	[/question]
+[/exercise]

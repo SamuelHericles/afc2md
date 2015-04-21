@@ -56,22 +56,35 @@ public class ConversorMarkDownTest {
 
 	@Test
 	public void notesComCodeEInlineCode() throws IOException, URISyntaxException {
-		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/notes_com_code_e_inline_code.afc");
+		String afc = "notes_com_code_e_inline_code.afc";
+		String md = "notes_com_code_e_inline_code.md";
+		verificaConversaoDeAFCemMD(afc, md);
+	}
+
+	@Test
+	public void exerciseQuestionsEAnswers() throws IOException, URISyntaxException {
+		String afc = "exercise_questions_e_answers.afc";
+		String md = "exercise_questions_e_answers.md";
+		verificaConversaoDeAFCemMD(afc, md);
+	}
+	
+	private void verificaConversaoDeAFCemMD(String arquivoAFC, String arquivoMD) throws URISyntaxException, IOException{
+		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivoAFC);
 		
 		MarkDown md = conversor.converte(afc);
 		String conteudoMD = md.conteudo();
-		
-		String conteudoEsperadoMD = obtemMdEsperadoDoArquivo("/exemplos/md/notes_com_code_e_inline_code.md");
+
+		String conteudoEsperadoMD = obtemMdEsperadoDoArquivo("/exemplos/md/"+arquivoMD);
 		Assert.assertEquals(conteudoEsperadoMD, conteudoMD);
 	}
 
-	public AFC criaAfcAPartirDoArquivo(String nomeAFC) throws URISyntaxException, IOException {
+	private AFC criaAfcAPartirDoArquivo(String nomeAFC) throws URISyntaxException, IOException {
 		Path pathAFC = Diretorio.getResourceAsPath(nomeAFC);
 		String conteudoAFC = Diretorio.getPathContents(pathAFC);
 		return new AFC(pathAFC, conteudoAFC, false);
 	}
 
-	public String obtemMdEsperadoDoArquivo(String nomeMD) throws URISyntaxException, IOException {
+	private String obtemMdEsperadoDoArquivo(String nomeMD) throws URISyntaxException, IOException {
 		Path pathMD = Diretorio.getResourceAsPath(nomeMD);
 		return Diretorio.getPathContents(pathMD);
 	}
