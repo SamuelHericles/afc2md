@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeAnswer;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeBox;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeChapter;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeCode;
@@ -35,6 +36,7 @@ public class ConversorMarkDown {
 	private List<ConversorDeSintaxe> conversores = new ArrayList<>();
 	
 	public ConversorMarkDown() {
+		conversores.add(new ConversorDeAnswer());
 		conversores.add(new ConversorDeTitle());
 		conversores.add(new ConversorDeSection());
 		conversores.add(new ConversorDeBox());
@@ -48,11 +50,11 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeList());
 		conversores.add(new ConversorDeTodo());
 		conversores.add(new ConversorDeNote());
-		conversores.add(new ConversorDeParagrafo());
 		conversores.add(new ConversorDeQuote());
 		conversores.add(new ConversorDeChapter());
 		conversores.add(new ConversorDeQuestion());
 		conversores.add(new ConversorDeExercise());
+		conversores.add(new ConversorDeParagrafo());
 	}
 	
 	public MarkDown converte(AFC afc) throws IOException {
