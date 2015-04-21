@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class ConversorDeQuestionTest {
 
-	private static final String TEXTO_QUESTAO = "\t\tEntre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n";
+	private static final String TEXTO_QUESTAO = "Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n";
 	private ConversorDeSintaxe conversor;
 
 	@Before
@@ -15,19 +15,19 @@ public class ConversorDeQuestionTest {
 	}
 
 	@Test
-	public void emUmaLinha() {
+	public void soComUm() {
 		String questao = "[question]\n"+
-						 TEXTO_QUESTAO+
+						 "\t\t"+TEXTO_QUESTAO+
 						 "[/question]\n";
-		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", conversor.converte(questao));
+		Assert.assertEquals("1. "+TEXTO_QUESTAO+"\n", conversor.converte(questao));
 	}
 
 	@Test
 	public void maiusculo() {
 		String questao = "[QUESTION]\n"+
-				 TEXTO_QUESTAO+
-				 "[/QUESTION]\n";
-		Assert.assertEquals("\n"+TEXTO_QUESTAO+"\n", conversor.converte(questao));
+						 "\t\t"+TEXTO_QUESTAO+
+						 "[/QUESTION]\n";
+		Assert.assertEquals("1. "+TEXTO_QUESTAO+"\n", conversor.converte(questao));
 	}
 
 }
