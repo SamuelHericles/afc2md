@@ -1,8 +1,7 @@
-*.afc
-*.md
 build
 target
 bin
 *.class
 /test-classes
 *.jar
+livro-teste/
