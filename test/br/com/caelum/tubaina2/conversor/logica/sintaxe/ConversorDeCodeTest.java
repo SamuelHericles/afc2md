@@ -109,4 +109,26 @@ public class ConversorDeCodeTest {
 		Assert.assertEquals(esperado, convertido);
 	}
 
+	@Test
+	public void removeCerquilha() {
+		String codigo = "[code java #]\n" +
+						"	class MeuPrograma {\n" +
+						"		public static void main(String[] args) {\n" +
+									"System.out.println(\"Minha primeira aplicação Java!!\");\n" +
+						"		}\n" +
+						"	}\n" +
+						"[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado = 	"``` java\n" +
+							"	class MeuPrograma {\n" +
+							"		public static void main(String[] args) {\n" +
+										"System.out.println(\"Minha primeira aplicação Java!!\");\n" +
+							"		}\n" +
+							"	}\n" +
+							"```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
 }
