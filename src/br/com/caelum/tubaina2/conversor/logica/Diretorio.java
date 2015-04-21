@@ -54,8 +54,7 @@ public class Diretorio {
 	}
 
 	public void copiaArquivosEstaticos() throws IOException, URISyntaxException {
-		URI arquivosURI = Diretorio.class.getResource("/arquivos").toURI();
-		Path arquivos = Paths.get(arquivosURI);
+		Path arquivos = getResourceAsPath("/arquivos");
 		copiaTodosOsArquivos(arquivos);
 	}
 
@@ -76,7 +75,7 @@ public class Diretorio {
 	private void criaAFCs(List<AFC> afcs, File[] files) throws IOException {
 		for (File file : files) {
 			Path path = Paths.get(file.getAbsolutePath());
-			String conteudo = new String(Files.readAllBytes(path));
+			String conteudo = getPathContents(path);
 			afcs.add(new AFC(path, conteudo));
 		}
 	}
@@ -111,6 +110,15 @@ public class Diretorio {
 				return FileVisitResult.CONTINUE;
 			}
 		});
+	}
+	
+	public static Path getResourceAsPath(String resource) throws URISyntaxException {
+		URI uri = Diretorio.class.getResource(resource).toURI();
+		return Paths.get(uri);
+	}
+
+	public static String getPathContents(Path path) throws IOException {
+		return new String(Files.readAllBytes(path));
 	}
 
 }
