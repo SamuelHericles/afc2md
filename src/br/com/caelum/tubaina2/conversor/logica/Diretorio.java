@@ -64,9 +64,10 @@ public class Diretorio {
 				return nome.endsWith(".afc");
 			}
 		});
-		if(files.length > 0){
-			Arrays.sort(files);
+		if(files == null) {
+			return new File[0];
 		}
+		Arrays.sort(files);
 		return files;
 	}
 	
