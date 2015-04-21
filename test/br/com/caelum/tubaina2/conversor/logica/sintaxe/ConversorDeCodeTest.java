@@ -14,7 +14,29 @@ public class ConversorDeCodeTest {
 	}
 
 	@Test
-	public void deveManterLinguagem() {
+	public void emUmaLinha() {
+		String codigo = "[code]javap -c MeuPrograma[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado =   "```javap -c MeuPrograma```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void maiusculo() {
+		String codigo = "[CODE]java NomeDaClasse[/CODE]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado =   "```java NomeDaClasse```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+	
+	@Test
+	public void mantemLinguagem() {
 		String codigo = "[code java]\n" +
 						"	public class Main {\n" +
 						"		public static void main(String... args){}\n" +
@@ -33,7 +55,7 @@ public class ConversorDeCodeTest {
 	}
 
 	@Test
-	public void deveRemoverHighlightQueForAtributoDeCode() {
+	public void removeHighlightQuandoForAtributoDeCode() {
 		String codigo = "[code java h=3]\n" +
 						"	public class UsuarioDao {\n" +
 						"		@PersistenceContext\n" +
@@ -54,7 +76,7 @@ public class ConversorDeCodeTest {
 	}
 
 	@Test
-	public void naoDeveRemoverHighlightForaDeCode() {
+	public void naoRemoverHForaDeCode() {
 		String trecho = "O namespace padrão dos componentes JSF é "
 						+ "%%xmlns:h=\"http://java.sun.com/jsf/html\"%% e "
 						+ "%%xmlns:f=\"http://java.sun.com/jsf/core\"%%.\n";
@@ -65,7 +87,7 @@ public class ConversorDeCodeTest {
 	}
 
 	@Test
-	public void naoDeveRemoverHighlightQueEstiverDentroDeCode() {
+	public void naoRemoveHQueEstiverDentroDeCode() {
 		String codigo = "	[code html]\n"+
 						"		<html xmlns=\"http://www.w3.org/1999/xhtml\"\n"+
 						"		      xmlns:ui=\"http://java.sun.com/jsf/facelets\"\n"+
