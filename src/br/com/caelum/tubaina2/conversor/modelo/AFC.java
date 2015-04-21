@@ -6,12 +6,12 @@ public class AFC {
 
 	private final Path path;
 	private final String conteudo;
-	private boolean readme;
+	private final boolean primeiro;
 	
-	public AFC(Path path, String conteudo) {
+	public AFC(Path path, String conteudo, boolean primeiro) {
 		this.path = path;
 		this.conteudo = conteudo;
-		this.readme = false;
+		this.primeiro = primeiro;
 	}
 
 	public Path path() {
@@ -22,12 +22,8 @@ public class AFC {
 		return conteudo;
 	}
 
-	public boolean isReadme() {
-		return readme;
+	public boolean primeiro() {
+		return primeiro;
 	}
 	
-	public void tornaReadme() {
-		this.readme = true;
-	}
-
 }

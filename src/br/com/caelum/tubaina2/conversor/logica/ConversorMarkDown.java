@@ -85,10 +85,11 @@ public class ConversorMarkDown {
 	}
 
 	private Path descobrePath(AFC afc) {
-		if(afc.isReadme()){
-			return afc.path().getParent().resolve("README.md");
+		Path path = afc.path();
+		if(afc.primeiro()){
+			return path.getParent().resolve("README.md");
 		} else {
-			return Paths.get(afc.path().toString().replace(".afc", ".md"));
+			return Paths.get(path.toString().replace(".afc", ".md"));
 		}
 	}
 

@@ -24,7 +24,7 @@ public class ConversorMarkDownTest {
 	@Test
 	public void obtemTituloEmUmaLinha() throws IOException {
 		String conteudoAFC = "[chapter AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC);
+		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
 
 		MarkDown md = conversor.converte(afc);
 		
@@ -35,7 +35,7 @@ public class ConversorMarkDownTest {
 	@Test
 	public void obtemTituloComEspacosNaFrente() throws IOException {
 		String conteudoAFC = "[chapter       AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC);
+		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
 
 		MarkDown md = conversor.converte(afc);
 		
@@ -46,7 +46,7 @@ public class ConversorMarkDownTest {
 	@Test
 	public void obtemTituloComQuebraDeLinhaTabsEEspacosNaFrente() throws IOException {
 		String conteudoAFC = "[chapter\n   \t\t \n   AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC);
+		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
 
 		MarkDown md = conversor.converte(afc);
 		
@@ -68,7 +68,7 @@ public class ConversorMarkDownTest {
 	public AFC criaAfcAPartirDoArquivo(String nomeAFC) throws URISyntaxException, IOException {
 		Path pathAFC = Diretorio.getResourceAsPath(nomeAFC);
 		String conteudoAFC = Diretorio.getPathContents(pathAFC);
-		return new AFC(pathAFC, conteudoAFC);
+		return new AFC(pathAFC, conteudoAFC, false);
 	}
 
 	public String obtemMdEsperadoDoArquivo(String nomeMD) throws URISyntaxException, IOException {

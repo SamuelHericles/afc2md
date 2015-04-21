@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,10 +37,6 @@ public class Diretorio {
 		
 		criaAFCs(afcs, files);
 
-		ordenaPorPath(afcs);
-
-		identificaReadme(afcs);
-		
 		return afcs;
 	}
 
@@ -69,27 +66,17 @@ public class Diretorio {
 				return nome.endsWith(".afc");
 			}
 		});
+		Arrays.sort(files);
 		return files;
 	}
 	
 	private void criaAFCs(List<AFC> afcs, File[] files) throws IOException {
+		boolean primeiro = true;
 		for (File file : files) {
 			Path path = Paths.get(file.getAbsolutePath());
 			String conteudo = getPathContents(path);
-			afcs.add(new AFC(path, conteudo));
-		}
-	}
-	private void ordenaPorPath(List<AFC> afcs) {
-		Collections.sort(afcs, new Comparator<AFC>() {
-			public int compare(AFC o1, AFC o2) {
-				return o1.path().compareTo(o2.path());
-			}
-		});
-	}
-
-	private void identificaReadme(List<AFC> afcs) {
-		if(!afcs.isEmpty()){
-			afcs.get(0).tornaReadme();
+			afcs.add(new AFC(path, conteudo, primeiro));
+			primeiro = false;
 		}
 	}
 
