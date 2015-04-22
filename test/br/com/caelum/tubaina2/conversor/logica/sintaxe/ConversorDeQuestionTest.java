@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class ConversorDeQuestionTest {
 
-	private static final String TEXTO_QUESTAO = "Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n";
 	private ConversorDeSintaxe conversor;
 
 	@Before
@@ -17,17 +16,159 @@ public class ConversorDeQuestionTest {
 	@Test
 	public void soComUm() {
 		String questao = "[question]\n"+
-						 "\t\t"+TEXTO_QUESTAO+
+						 "		Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n"+
 						 "[/question]\n";
-		Assert.assertEquals("1. "+TEXTO_QUESTAO+"\n", conversor.converte(questao));
+		
+		String convertido = conversor.converte(questao);
+		
+		String esperado = "1. Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n";
+		Assert.assertEquals(esperado, convertido);
 	}
 
 	@Test
 	public void maiusculo() {
 		String questao = "[QUESTION]\n"+
-						 "\t\t"+TEXTO_QUESTAO+
+						 "Inicie o Glassfish e acesse a URL: %%http://localhost:8080/%% \n"+
 						 "[/QUESTION]\n";
-		Assert.assertEquals("1. "+TEXTO_QUESTAO+"\n", conversor.converte(questao));
+		
+		String convertido = conversor.converte(questao);
+		
+		String esperado = "1. Inicie o Glassfish e acesse a URL: %%http://localhost:8080/%%\n";
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void variasSeguidas() {
+		String questoes = "[question]\n"+
+						 "		Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um arquivo chamado **index.xhtml**.\n"+
+						 "[/question]\n" +
+						 "[question]\n"+
+						 "	Implemente nosso primeiro código JSF com um campo de texto e um botão.\n"+
+						 "[/question]\n";
+		
+		String convertido = conversor.converte(questoes);
+		
+		String esperado = "1. Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um arquivo chamado **index.xhtml**.\n" +
+						  "1. Implemente nosso primeiro código JSF com um campo de texto e um botão.\n";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void comVariasLinhasSoMantemUmTab() {
+		String questao = "[question]\n"+
+						 "		Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um \n" + 
+						 "		arquivo chamado **index.xhtml**. \n"+
+						 "		Após definir o nome do arquivo clique em ::Next:: e você verá a seguinte tela:\n"+
+						 "		\n" +
+						 "		[img imagens/nocoes-basicas/transitional.png w=60%]\n"+
+						 "		Selecione a mesma opção da imagem acima.\n"+
+						 "		\n"+
+						 "[/question]\n";
+		
+		String convertido = conversor.converte(questao);
+		
+		String esperado = "1. Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um\n" +
+						 "	arquivo chamado **index.xhtml**.\n" +
+						 "	Após definir o nome do arquivo clique em ::Next:: e você verá a seguinte tela:\n"+
+						 "\n" +
+						 "	[img imagens/nocoes-basicas/transitional.png w=60%]\n"+
+						 "	Selecione a mesma opção da imagem acima.\n"+
+						 "\n";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void seguidasComVariasLinhasMantemSoUmTabESoUmEnterEntreAsQuestoes() {
+		String questoes = "	[question]\n"+
+						 "		Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um \n" + 
+						 "		arquivo chamado **index.xhtml**. \n"+
+						 "		Após definir o nome do arquivo clique em ::Next:: e você verá a seguinte tela:\n"+
+						 "		\n" +
+						 "		[img imagens/nocoes-basicas/transitional.png w=60%]\n"+
+						 "		Selecione a mesma opção da imagem acima.\n"+
+						 "		\n"+
+						 "	[/question]\n"+
+						 "[question]\n"+
+						 "	Inicie o Glassfish e acesse a URL: \n" + 
+						 "	%%http://localhost:8080/fj26-notas-fiscais/index.xhtml%% \n"+
+						 "	O resultado deve ser esse:\n"+
+						 "\n" +
+						 "	[img imagens/nocoes-basicas/helloworld.png w=35]\n"+
+						 "\n" +
+						 "\n" +
+						 "[/question]\n"+
+						 "[question]\n"+
+						 "Verifique o código fonte gerado pela página. Repare que não é nada mais que simples HTML.\n"+
+						 "[/question]\n";
+		
+		String convertido = conversor.converte(questoes);
+		
+		String esperado = "1. Em %%WebContent%%, através do menu **File -> New -> Other -> HTML** crie um\n" +
+						 "	arquivo chamado **index.xhtml**.\n" +
+						 "	Após definir o nome do arquivo clique em ::Next:: e você verá a seguinte tela:\n"+
+						 "\n" +
+						 "	[img imagens/nocoes-basicas/transitional.png w=60%]\n"+
+						 "	Selecione a mesma opção da imagem acima.\n"+
+						 "1. Inicie o Glassfish e acesse a URL:\n"+
+						 "	%%http://localhost:8080/fj26-notas-fiscais/index.xhtml%%\n"+
+						 "	O resultado deve ser esse:\n"+
+						 "\n" +
+						 "	[img imagens/nocoes-basicas/helloworld.png w=35]\n"+
+						 "1. Verifique o código fonte gerado pela página. Repare que não é nada mais que simples HTML.\n";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void deixaTextoQueNaoTaDentroDaQuestao() {
+		String questao = "## Exercício:  Primeira página\n"+
+						 "	[question]\n"+
+						 "			Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n"+
+						 "	[/question]\n"+
+						 "\n"+
+						 "## Criando formulário de cadastro";
+		
+		String convertido = conversor.converte(questao);
+		
+		String esperado =
+				"## Exercício:  Primeira página\n"+
+				"1. Entre no diretório %%Caelum/26/%% e copie os jars da pasta %%jars%% para a pasta %%WEB-INF/lib%% do seu projeto.\n"+
+				 "\n"+
+				 "## Criando formulário de cadastro\n";
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void naoModificaTabsDeCode() {
+		String questao = "	[question]\n"+
+						"	Altere seu programa para imprimir uma mensagem diferente.\n"+
+						"		Por exemplo, faça:\n"+
+						"		``` java\n"+
+						"			class MeuProgramaModificado {\n"+
+						"				public static void main(String[] args) {\n"+
+						"					System.out.println(\"Uma mensagem diferente.\");\n"+
+						"				}\n"+
+						"			}\n"+
+						"		```\n"+
+						"Rode e veja a mensagem alterada!\n"+
+						"[/question]";
+		
+		String convertido = conversor.converte(questao);
+		
+		String esperado =
+				"1. Altere seu programa para imprimir uma mensagem diferente.\n"+
+				"	Por exemplo, faça:\n"+
+				"	``` java\n"+
+				"			class MeuProgramaModificado {\n"+
+				"				public static void main(String[] args) {\n"+
+				"					System.out.println(\"Uma mensagem diferente.\");\n"+
+				"				}\n"+
+				"			}\n"+
+				"	```\n"+
+				"	Rode e veja a mensagem alterada!\n";
+		Assert.assertEquals(esperado, convertido);
 	}
 
 }

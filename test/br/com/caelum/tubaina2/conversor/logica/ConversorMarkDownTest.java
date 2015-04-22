@@ -69,6 +69,12 @@ public class ConversorMarkDownTest {
 		verificaConversaoDeAFCemMD(afc, md);
 	}
 	
+	@Test
+	public void exerciseComQuestionsEmVariasLinhas() throws IOException, URISyntaxException {
+		String afc = "exercise_com_questions_em_varias_linhas.afc";
+		String md = "exercise_com_questions_em_varias_linhas.md";
+		verificaConversaoDeAFCemMD(afc, md);
+	}
 	
 	@Test
 	public void codeEmUmaLinhaComTabsDentroDeQuestions() throws IOException, URISyntaxException {

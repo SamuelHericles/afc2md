@@ -52,9 +52,9 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeNote());
 		conversores.add(new ConversorDeQuote());
 		conversores.add(new ConversorDeChapter());
-		conversores.add(new ConversorDeQuestion());
-		conversores.add(new ConversorDeExercise());
 		conversores.add(new ConversorDeParagrafo());
+		conversores.add(new ConversorDeExercise());
+		conversores.add(new ConversorDeQuestion());
 	}
 	
 	public MarkDown converte(AFC afc) throws IOException {
