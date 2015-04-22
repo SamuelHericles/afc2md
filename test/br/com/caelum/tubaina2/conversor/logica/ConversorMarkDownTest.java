@@ -68,6 +68,14 @@ public class ConversorMarkDownTest {
 		verificaConversaoDeAFCemMD(afc, md);
 	}
 	
+	
+	@Test
+	public void codeEmUmaLinhaComTabsDentroDeQuestions() throws IOException, URISyntaxException {
+		String afc = "code_em_uma_linha_com_tabs_dentro_de_questions.afc";
+		String md = "code_em_uma_linha_com_tabs_dentro_de_questions.md";
+		verificaConversaoDeAFCemMD(afc, md);
+	}
+	
 	private void verificaConversaoDeAFCemMD(String arquivoAFC, String arquivoMD) throws URISyntaxException, IOException{
 		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivoAFC);
 		

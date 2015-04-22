@@ -13,7 +13,7 @@ public class ConversorDeParagrafo implements ConversorDeSintaxe {
 		boolean dentroDeCode = false;
 		for (String linha : linhas) {
 			boolean achouAberturaOuFechamentoDeCode = false;
-			if(linha.trim().startsWith("```")) {
+			if(linha.trim().startsWith("```") && !linha.trim().endsWith("```")) {
 				dentroDeCode = ! dentroDeCode;
 				achouAberturaOuFechamentoDeCode = true;
 			}
