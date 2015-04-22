@@ -2,6 +2,8 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeParagrafo implements ConversorDeSintaxe {
 
+	private static final String CODIGO = "```";
+
 	@Override
 	public String converte(String sintaxe) {
 		return trimEmTudoOQueNaoForCode(sintaxe);
@@ -13,12 +15,13 @@ public class ConversorDeParagrafo implements ConversorDeSintaxe {
 		boolean dentroDeCode = false;
 		for (String linha : linhas) {
 			boolean achouAberturaOuFechamentoDeCode = false;
-			if(linha.trim().startsWith("```") && !linha.trim().endsWith("```")) {
+			String linhaSemEspacos = linha.trim();
+			if(linhaSemEspacos.equals(CODIGO) || (linhaSemEspacos.startsWith(CODIGO) && !linhaSemEspacos.endsWith(CODIGO))) {
 				dentroDeCode = ! dentroDeCode;
 				achouAberturaOuFechamentoDeCode = true;
 			}
 			if(!dentroDeCode || achouAberturaOuFechamentoDeCode) {
-				linha = linha.trim();
+				linha = linhaSemEspacos;
 			}
 			sb.append(linha + "\n");
 		}

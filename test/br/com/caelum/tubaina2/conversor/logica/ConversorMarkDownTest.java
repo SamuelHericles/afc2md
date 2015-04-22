@@ -1,3 +1,4 @@
+
 package br.com.caelum.tubaina2.conversor.logica;
 
 import java.io.IOException;
@@ -71,8 +72,8 @@ public class ConversorMarkDownTest {
 	
 	@Test
 	public void codeEmUmaLinhaComTabsDentroDeQuestions() throws IOException, URISyntaxException {
-		String afc = "code_em_uma_linha_com_tabs_dentro_de_questions.afc";
-		String md = "code_em_uma_linha_com_tabs_dentro_de_questions.md";
+		String afc = "texto_com_tabs_code_em_uma_linha_e_em_varias_linhas.afc";
+		String md = "texto_com_tabs_code_em_uma_linha_e_em_varias_linhas.md";
 		verificaConversaoDeAFCemMD(afc, md);
 	}
 	
