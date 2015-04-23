@@ -82,6 +82,13 @@ public class ConversorMarkDownTest {
 		String md = "texto_com_tabs_code_em_uma_linha_e_em_varias_linhas.md";
 		verificaConversaoDeAFCemMD(afc, md);
 	}
+
+	@Test
+	public void variosBoxesConsecutivosComVariasLinhasECode() throws IOException, URISyntaxException {
+		String afc = "varios_boxes_consecutivos_com_varias_linhas_e_code.afc";
+		String md = "varios_boxes_consecutivos_com_varias_linhas_e_code.md";
+		verificaConversaoDeAFCemMD(afc, md);
+	}
 	
 	private void verificaConversaoDeAFCemMD(String arquivoAFC, String arquivoMD) throws URISyntaxException, IOException{
 		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivoAFC);

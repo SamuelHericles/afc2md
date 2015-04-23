@@ -16,53 +16,56 @@ public class ConversorDeBoxTest {
 	@Test
 	public void emUmaLinha() {
 		String box = "[box Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**";
-		
-		Assert.assertEquals(esperado, conversor.converte(box));
-	}
-
-	@Test
-	public void emMaisDeUmaLinha() {
-		String box = "[box Git e GitHub sao \na mesma coisa?]";
-		String esperado = "> **Git e GitHub sao \na mesma coisa?**";
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 
 	@Test
 	public void maiusculo() {
-		String box = "[BOX Git e GitHub sao \na mesma coisa?]";
-		String esperado = "> **Git e GitHub sao \na mesma coisa?**";
+		String box = "[BOX Git e GitHub sao a mesma coisa?]";
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 	
 	@Test
 	public void doisSeguidos() {
-		String textoBox1 = "Git e GitHub sao a mesma coisa?";
-		String box1 = "[box " + textoBox1 + "]";
-
-		String textoBox2 = "Para saber mais: bla";
-		String box2 = "[box " + textoBox2 + "]";
+		String box = "[box Git e GitHub sao a mesma coisa?]\n"+
+					  "	Não.\n"+
+					  "[/box]\n"+
+					  "[box Para saber mais: bla]\n"+
+					  "	Blablablabla.\n"+
+					  "[/box]\n";
 		
-		String esperado1 = "> **" +textoBox1 +"**";
-		String esperado2 = "> **" +textoBox2 +"**";
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n"+
+						  "> \n"+
+						  "> Não.\n"+
+						  "\n"+
+						  "<!-- comentario para separar quotes adjacentes -->\n"+
+						  "\n"+
+						  "> **Para saber mais: bla**\n"+
+						  "> \n"+
+						  "> Blablablabla.\n"+
+						  "\n"+
+						  "<!-- comentario para separar quotes adjacentes -->\n"+
+						  "\n";
 		
-		Assert.assertEquals(esperado1 +"\n" +esperado2, conversor.converte(box1 +"\n" +box2));
+		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 	
 	@Test
 	public void comEspacosNaFrente() {
 		String box = "[box      Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**";
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 
 	@Test
-	public void comQuebrasDeLinhaTabsEEspacosNaFrente() {
-		String box = "[box\n   \t\t    \n         Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**";
+	public void comTabsEEspacosNaFrente() {
+		String box = "[box   \t\t     Git e GitHub sao a mesma coisa?]";
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
@@ -70,7 +73,55 @@ public class ConversorDeBoxTest {
 	@Test
 	public void semTitulo() {
 		String box = "[box]";
-		String esperado = "> ****";
+		String esperado = "";
+		
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
+	
+	@Test
+	public void comVariasLinhas(){
+		String box = "[box GitHub for Windows]\n"+
+					 "A maioria dos usuários do Windows não tem o hábito de utilizar \n"+
+					 "o prompt de comandos, e perfere instalar alguma aplicação visual \n"+
+					 "para trabalhar com o Git. \n"+
+					 "\n"+
+					 "Uma destas aplicações é o **GitHub for Windows**, e mostraremos \n"+
+					 "como utilizá-la no capítulo [ref-label capitulo-github-windows].\n"+
+					 "[/box]\n";
+		
+		String esperado = "> **GitHub for Windows**\n"+
+						  "> \n"+
+						  "> A maioria dos usuários do Windows não tem o hábito de utilizar\n"+
+						  "> o prompt de comandos, e perfere instalar alguma aplicação visual\n"+
+						  "> para trabalhar com o Git.\n"+
+						  "> \n"+
+						  "> Uma destas aplicações é o **GitHub for Windows**, e mostraremos\n"+
+						  "> como utilizá-la no capítulo [ref-label capitulo-github-windows].\n"+
+						  "\n"+
+						  "<!-- comentario para separar quotes adjacentes -->\n"+
+						  "\n";
+		
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
+
+	@Test
+	public void comVariasLinhasSemTitulo(){
+		String box = "[box]\n"+
+					 "A maneira mais comum de usar Git é pela linha de comando, acessível\n"+
+					 "através de um terminal. \n"+
+					 "\n"+
+					 "É o jeito que a maior parte dos bons profissionais do mercado \n"+
+					 "utiliza o Git e será nossa escolha nesse livro.\n"+
+					 "[/box]\n";
+		
+		String esperado = "> A maneira mais comum de usar Git é pela linha de comando, acessível\n"+
+						  "> através de um terminal.\n"+
+						  "> \n"+
+						  "> É o jeito que a maior parte dos bons profissionais do mercado\n"+
+						  "> utiliza o Git e será nossa escolha nesse livro.\n"+
+						  "\n"+
+						  "<!-- comentario para separar quotes adjacentes -->\n"+
+						  "\n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
