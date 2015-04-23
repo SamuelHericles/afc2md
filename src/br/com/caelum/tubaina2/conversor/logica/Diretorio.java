@@ -5,6 +5,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
@@ -14,6 +16,7 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
@@ -86,8 +89,11 @@ public class Diretorio {
 			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
 				return FileVisitResult.CONTINUE;
 			}
+			//veja http://fgaliegue.blogspot.com.br/2014/03/working-with-java-7-file-api-recursive.html
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-				Path target = diretorio.resolve(file.getFileName());
+				Path absolutePath = file.toAbsolutePath();
+				Path relativePath = arquivos.relativize(absolutePath);
+				Path target = diretorio.resolve(relativePath.toString());
 				Files.copy(file, target, StandardCopyOption.REPLACE_EXISTING);
 				return FileVisitResult.CONTINUE;
 			}
@@ -100,9 +106,26 @@ public class Diretorio {
 		});
 	}
 	
-	public static Path getResourceAsPath(String resource) throws URISyntaxException {
+	public static Path getResourceAsPath(String resource) throws URISyntaxException, IOException {
 		URI uri = Diretorio.class.getResource(resource).toURI();
-		return Paths.get(uri);
+		if(isResourceInJar(uri)){
+			return getResourceFromJar(uri);
+		} else {
+			return Paths.get(uri);
+		}
+	}
+
+	private static boolean isResourceInJar(URI uri) {
+		return uri.toString().contains("!");
+	}
+
+	public static Path getResourceFromJar(URI fullURI) throws IOException {
+		//veja http://stackoverflow.com/a/22605905
+		String[] uriParts = fullURI.toString().split("!");
+		URI jarURI = URI.create(uriParts[0]);
+		FileSystem fs = FileSystems.newFileSystem(jarURI, new HashMap<String, String>());
+		String resourceURI = uriParts[1];
+		return fs.getPath(resourceURI);
 	}
 
 	public static String getPathContents(Path path) throws IOException {

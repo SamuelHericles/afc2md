@@ -8,7 +8,7 @@
 				<attribute name="Main-Class" value="br.com.caelum.tubaina2.conversor.Main" />
 				<attribute name="Class-Path" value="." />
 			</manifest>
-			<fileset dir="bin" />
+			<fileset dir="bin" defaultexcludes="no" />
 		</jar>
 	</target>
 </project>
