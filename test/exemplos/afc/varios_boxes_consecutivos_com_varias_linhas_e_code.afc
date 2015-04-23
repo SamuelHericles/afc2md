@@ -44,7 +44,7 @@ Se você não souber onde é a pasta pessoal, digite o seguinte comando em
 um terminal:
 
 [code]
-$ echo ~
+	$ echo ~
 [/code]
 
 No Windows Vista, 7 ou 8, será algo como %%C:\Users\Fulano\%% ou, no Git

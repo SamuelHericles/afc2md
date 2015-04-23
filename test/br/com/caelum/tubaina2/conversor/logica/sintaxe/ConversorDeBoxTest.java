@@ -125,5 +125,37 @@ public class ConversorDeBoxTest {
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
+	
+	@Test
+	public void comVariasLinhasEComCodeDentro(){
+		String box = "[box Pasta pessoal]\n"+
+					 "A pasta pessoal (::ou home directory::, em inglês) é o local dos arquivos\n"+
+					 "de usuário como documentos, fotos, músicas etc.\n"+
+					 "\n"+
+					 "Se você não souber onde é a pasta pessoal, digite o seguinte comando em\n"+
+					 "um terminal:\n"+
+					 "\n"+
+					 "```\n"+
+					 "	$ echo ~\n"+
+					 "```\n"+
+					 "[/box]";
+
+		String esperado = "> **Pasta pessoal**\n"+
+						  "> \n"+
+						  "> A pasta pessoal (::ou home directory::, em inglês) é o local dos arquivos\n"+
+						  "> de usuário como documentos, fotos, músicas etc.\n"+
+						  "> \n"+
+						  "> Se você não souber onde é a pasta pessoal, digite o seguinte comando em\n"+
+						  "> um terminal:\n"+
+						  "> \n"+
+						  "> ```\n"+
+						  "> 	$ echo ~\n"+
+						  "> ```\n"+
+						  "\n"+
+						  "<!-- comentario para separar quotes adjacentes -->\n"+
+						  "\n";
+					
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
 
 }

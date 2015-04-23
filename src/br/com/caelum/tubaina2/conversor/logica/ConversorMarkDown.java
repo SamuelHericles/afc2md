@@ -39,8 +39,8 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeAnswer());
 		conversores.add(new ConversorDeTitle());
 		conversores.add(new ConversorDeSection());
-		conversores.add(new ConversorDeBox());
 		conversores.add(new ConversorDeCode());
+		conversores.add(new ConversorDeBox());
 		conversores.add(new ConversorDeItalico());
 		conversores.add(new ConversorDeInlineCode());
 		conversores.add(new ConversorDeImg());

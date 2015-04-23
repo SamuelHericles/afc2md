@@ -8,8 +8,8 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 	private static final String ABERTURA_QUESTION = "[question]";
 	private static final String FECHAMENTO_QUESTION = "[/question]";
 
-	AjudanteDeParsingDeQuestion question;
-	AjudanteDeParsingDeCode code;
+	private AjudanteDeParsingDeQuestion question;
+	private AjudanteDeParsingDeCode code;
 	
 	@Override
 	public String converte(String sintaxe) {

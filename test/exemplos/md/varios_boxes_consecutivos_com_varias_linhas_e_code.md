@@ -51,7 +51,7 @@ Dentro do arquivo `filmes.txt`, coloque o seguinte conteúdo:
 > um terminal:
 >
 > ```
-> $ echo ~
+> 	$ echo ~
 > ```
 >
 > No Windows Vista, 7 ou 8, será algo como `C:\Users\Fulano\` ou, no Git
