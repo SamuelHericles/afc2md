@@ -119,7 +119,25 @@ public class ConversorDeImgTest {
 		Assert.assertEquals(esperado, convertido);
 	}
 
-	//
+	@Test
+	public void variasSeguidas(){
+		String sintaxe = "[img imagens/cap2/github_signup.png w=60 \"Criando conta no GitHub\"]\n"+
+						 "\n"+
+						 "Então, selecione o plano apropriado e finalize o cadastro, clicando em\n"+
+						 "::Finish Signup::. \n"+
+						 "\n"+
+						 "[img imagens/cap2/finish_signup.png w=80 \"Selecionando plano no GitHub\"]\n";
+
+		String convertido = conversor.converte(sintaxe);
+		
+		String esperado = "![Criando conta no GitHub {w=60}](imagens/cap2/github_signup.png)\n"+
+						 "\n"+
+						 "Então, selecione o plano apropriado e finalize o cadastro, clicando em\n"+
+						 "::Finish Signup::. \n"+
+						 "\n"+
+						 "![Selecionando plano no GitHub {w=80}](imagens/cap2/finish_signup.png)\n";
+		Assert.assertEquals(esperado, convertido);
+	}
 	
 	
 
