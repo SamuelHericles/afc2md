@@ -24,11 +24,6 @@ precisaríamos escrever é algo como:
 	}
 ```
 
-> **Notação**
-Todos os códigos apresentados na apostila estão formatados com recursos visuais para auxiliar a
-leitura e compreensão dos mesmos. Quando for digitar os códigos no computador, trate os códigos
-como texto simples.
-
 
 Após digitar o código acima, grave-o como **MeuPrograma.java** em algum diretório. Para compilar, você
 deve pedir para que o compilador de Java da Oracle, chamado `javac`, gere o bytecode correspondente ao
