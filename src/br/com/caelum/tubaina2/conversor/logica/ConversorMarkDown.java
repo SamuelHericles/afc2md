@@ -78,11 +78,12 @@ public class ConversorMarkDown {
 
 	private String descobreTitulo(String conteudo) {
 		Matcher matcher = Pattern.compile(ConversorDeChapter.REGEX_CHAPTER).matcher(conteudo);
-		matcher.find();
-		String titulo = matcher.group(1);
-		if(titulo != null && !titulo.isEmpty()) {
-			return titulo.trim();
-		} 
+		if(matcher.find() && matcher.groupCount() >= 1) {
+			String titulo = matcher.group(1);
+			if(titulo != null && !titulo.isEmpty()) {
+				return titulo.trim();
+			} 
+		}
 		return "Capítulo sem título";
 	}
 
