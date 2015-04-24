@@ -39,7 +39,7 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 
 	private String removeDuasOuMaisQuebrasDeLinhasSeguidasAntesDeQuestion(String convertido) {
 		//No Markdown, se uma lista numerada tiver duas ou mais quebras de linha, a contagem recomeça.
-		return convertido.replaceAll("(?s)\n{2,}1.", "\n1.");
+		return convertido.replaceAll("(?s)\n{2,}1\\.", "\n1.");
 	}
 
 	private void processaLinha(StringBuilder convertido, String linha) {
@@ -50,17 +50,21 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 		}
 	}
 
-	public void processaLinhaQueEstaDentroDeQuestion(StringBuilder convertido, String linha) {
+	private void processaLinhaQueEstaDentroDeQuestion(StringBuilder convertido, String linha) {
 		if(question.estaNaPrimeiraLinha()){
 			adicionaPrimeiraLinhaDeQuestion(convertido, linha);
+			question.naoVazia();
 		} else {
 			processaOutrasLinhasDeQuestion(convertido, linha);
 		}
 	}
 
-	public void processaOutrasLinhasDeQuestion(StringBuilder convertido, String linha) {
+	private void processaOutrasLinhasDeQuestion(StringBuilder convertido, String linha) {
 		if(linhaEstaVazia(linha)){
-			adicionaLinhaSemEspacosETabsNaFrente(convertido, linha);
+			if(!question.foiVazia){
+				adicionaLinhaSemEspacosETabsNaFrente(convertido, linha);
+			}
+			question.vazia();
 		} else {
 			code.verificaSeEstaDentro(linha);
 			if(code.naoEstaDentroNemAbrindoNemFechando()) {
@@ -68,14 +72,15 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 			} else {
 				adicionaLinhaSemAlterar(convertido, linha);
 			}
+			question.naoVazia();
 		}
 	}
 
-	public boolean linhaEstaVazia(String linha) {
+	private boolean linhaEstaVazia(String linha) {
 		return linha.trim().isEmpty();
 	}
 
-	public StringBuilder adicionaLinhaComApenasUmTabNaFrente(StringBuilder convertido, String linha) {
+	private StringBuilder adicionaLinhaComApenasUmTabNaFrente(StringBuilder convertido, String linha) {
 		return convertido.append("\t" + linha.trim() + "\n");
 	}
 
@@ -96,12 +101,14 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 		private boolean achouAbertura;
 		private boolean achouFechamento;
 		private boolean naPrimeiraLinha ;
+		private boolean foiVazia;
 
 		AjudanteDeParsingDeQuestion() {
 			dentro = false;
 			achouAbertura = false;
 			achouFechamento = false;
 			naPrimeiraLinha = false;
+			foiVazia = false;
 		}
 		
 		void verificaSeEstaNaPrimeiraLinha() {
@@ -137,6 +144,14 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 		
 		boolean estaNaPrimeiraLinha(){
 			return naPrimeiraLinha;
+		}
+
+		void naoVazia() {
+			foiVazia = false;
+		}
+
+		void vazia() {
+			foiVazia = true;
 		}
 	}
 	

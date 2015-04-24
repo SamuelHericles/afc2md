@@ -171,4 +171,51 @@ public class ConversorDeQuestionTest {
 		Assert.assertEquals(esperado, convertido);
 	}
 
+
+	@Test
+	public void removeDuasQuebrasDeLinhaConsecutivas() {
+		String questao = "[question]\n"+
+						 "Agora criaremos o nosso projeto dentro do Eclipse.\n"+
+						 "\n"+
+						 "\n"+
+						 "* Clique em _Finish_ e o projeto está criado. Se estiver na\n"+
+						 "perspectiva **Java** e for perguntado sobre a mudança para\n"+
+						 "a perspectiva **Java EE**, clique em _No_.\n"+
+						 "![ {w=65%}](imagens/projeto/novas/new_project_09.png)\n"+
+						 "\n"+
+						 "* Assim ficará a estrutura do seu projeto:\n"+
+						 "![ {w=50%}](imagens/projeto/novas/new_project_10.png)\n"+
+						 "\n"+
+						 "\n"+
+						 "> **Versões do Eclipse**\n"+
+						 ">\n"+
+						 "> O suporte nativo a JSF 2 foi adicionado ao Eclipse na versão 3.6. Em versões\n"+
+						 "> anteriores, não havia um bom modo de ter autocomplete nos arquivos do facelets.\n"+
+						 "> Uma alternativa era o uso do plugin JBoss Tools.\n"+
+						 "\n"+
+						 "<!-- comentario para separar quotes adjacentes -->\n"+
+						 "\n"+
+						 "[/question]\n";
+
+		String esperado ="1. Agora criaremos o nosso projeto dentro do Eclipse.\n"+
+						 "\n"+
+						 "	* Clique em _Finish_ e o projeto está criado. Se estiver na\n"+
+						 "	perspectiva **Java** e for perguntado sobre a mudança para\n"+
+						 "	a perspectiva **Java EE**, clique em _No_.\n"+
+						 "	![ {w=65%}](imagens/projeto/novas/new_project_09.png)\n"+
+						 "\n"+
+						 "	* Assim ficará a estrutura do seu projeto:\n"+
+						 "	![ {w=50%}](imagens/projeto/novas/new_project_10.png)\n"+
+						 "\n"+
+						 "	> **Versões do Eclipse**\n"+
+						 "	>\n"+
+						 "	> O suporte nativo a JSF 2 foi adicionado ao Eclipse na versão 3.6. Em versões\n"+
+						 "	> anteriores, não havia um bom modo de ter autocomplete nos arquivos do facelets.\n"+
+						 "	> Uma alternativa era o uso do plugin JBoss Tools.\n"+
+						 "\n"+
+						 "	<!-- comentario para separar quotes adjacentes -->\n"+
+						 "\n";
+
+		Assert.assertEquals(esperado, conversor.converte(questao));
+	}	
 }
