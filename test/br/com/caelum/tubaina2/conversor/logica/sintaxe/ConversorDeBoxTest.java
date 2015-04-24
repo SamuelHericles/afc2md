@@ -14,21 +14,61 @@ public class ConversorDeBoxTest {
 	}
 
 	@Test
-	public void emUmaLinha() {
-		String box = "[box Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
+	public void comTitulo() {
+		String box = "[box Git e GitHub sao a mesma coisa?]\n"+
+					  "	Não.\n"+
+					  "[/box]\n";
+		
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n"+
+						  "> \n"+
+						  "> Não.\n"+
+						  "\n<!-- comentario para separar quotes adjacentes -->\n\n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 
 	@Test
 	public void maiusculo() {
-		String box = "[BOX Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
+		String box = "[BOX Git e GitHub sao a mesma coisa?]\n"+
+					  "	Não.\n"+
+					  "[/BOX]\n";
+		
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n"+
+						  "> \n"+
+						  "> Não.\n"+
+						  "\n<!-- comentario para separar quotes adjacentes -->\n\n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
 	
+	@Test
+	public void comEspacosNaFrente() {
+		String box = "[box      Git e GitHub sao a mesma coisa?]\n"+
+					  "	Não.\n"+
+					  "[/box]\n";
+
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n"+
+						  "> \n"+
+						  "> Não.\n"+
+						  "\n<!-- comentario para separar quotes adjacentes -->\n\n";
+		
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
+
+	@Test
+	public void comTabsEEspacosNaFrente() {
+		String box = "[box   \t\t     Git e GitHub sao a mesma coisa?]\n"+
+					  "	Não.\n"+
+					  "[/box]\n";
+
+		String esperado = "> **Git e GitHub sao a mesma coisa?**\n"+
+						  "> \n"+
+						  "> Não.\n"+
+						  "\n<!-- comentario para separar quotes adjacentes -->\n\n";
+		
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
+
 	@Test
 	public void doisSeguidos() {
 		String box = "[box Git e GitHub sao a mesma coisa?]\n"+
@@ -55,25 +95,13 @@ public class ConversorDeBoxTest {
 	}
 	
 	@Test
-	public void comEspacosNaFrente() {
-		String box = "[box      Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
-		
-		Assert.assertEquals(esperado, conversor.converte(box));
-	}
-
-	@Test
-	public void comTabsEEspacosNaFrente() {
-		String box = "[box   \t\t     Git e GitHub sao a mesma coisa?]";
-		String esperado = "> **Git e GitHub sao a mesma coisa?**\n> \n";
-		
-		Assert.assertEquals(esperado, conversor.converte(box));
-	}
-	
-	@Test
 	public void semTitulo() {
-		String box = "[box]";
-		String esperado = "";
+		String box = "[box]\n"+
+					  "	Git e GitHub não são a mesma coisa!\n"+
+					  "[/box]\n";
+	
+		String esperado = "> Git e GitHub não são a mesma coisa!\n"+
+						  "\n<!-- comentario para separar quotes adjacentes -->\n\n";
 		
 		Assert.assertEquals(esperado, conversor.converte(box));
 	}
