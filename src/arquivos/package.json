@@ -4,7 +4,8 @@
   "description": "apostila",
   "private": true,
   "dependencies": {
-    "gitbook-plugin-cdc": "git+ssh://git@github.com:casadocodigo/gitbook-plugin-cdc.git"
+    "gitbook-plugin-cdc": "casadocodigo/gitbook-plugin-cdc",
+    "gitbook-plugin-caelum-tema": "git+ssh://git@github.com:caelum/gitbook-plugin-caelum-tema.git"
   }
 }
 

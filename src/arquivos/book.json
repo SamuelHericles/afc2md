@@ -20,7 +20,7 @@
 		"footerTemplate": "<p id='ebook-footer'></p><script>var footer = document.getElementById('ebook-footer'); footer.innerHTML = _PAGENUM_ - 2; if(_PAGENUM_ % 2 != 0){ footer.style.textAlign = 'right'; }</script>"
 	},
 
-	"plugins": ["cdc"],
+	"plugins": ["cdc", "caelum-tema"],
 	
 	"links": {
 		"gitbook": false
