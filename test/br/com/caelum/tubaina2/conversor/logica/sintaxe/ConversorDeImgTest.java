@@ -139,6 +139,16 @@ public class ConversorDeImgTest {
 		Assert.assertEquals(esperado, convertido);
 	}
 	
-	
+
+	@Test
+	public void comLabel(){
+		String sintaxe = "[img imagens/fonte_pequena.png w=90% \"Repare que a fonte do texto que estamos querendo destacar está menor que a fonte desta frase. É um forte indicativo de que será impossível de ler na versão impressa.\" label=figura-fonte-pequena]";
+
+		String convertido = conversor.converte(sintaxe);
+		
+		String esperado = "![Repare que a fonte do texto que estamos querendo destacar está menor que a fonte desta frase. É um forte indicativo de que será impossível de ler na versão impressa. {w=90%}](imagens/fonte_pequena.png)";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
 
 }
