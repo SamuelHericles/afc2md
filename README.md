@@ -1,11 +1,40 @@
 # afc2md
-Conversor de `.afc` (Tubaina) para `.md` (Markdown).
+Conversor de `.afc` (Tubaina) para `.md` (Markdown) no _sabor_ do [Gitbook](https://github.com/GitbookIO/gitbook), com algumas pitadas do plugin [gitbook-plugin-cdc](https://github.com/casadocodigo/gitbook-plugin-cdc).
+
+## Como executar
+
+### Gerando o jar
+Você vai precisar dos seguintes pré-requisitos:
+* Java JDK 1.7+
+* Maven
+
+Baixe o projeto e execute `mvn package`. Será gerado o `afc2md-1.0.0.jar` na pasta `target`.
+
+### Executando
+Execute o comando:
+```
+java -jar afc2md-1.0.0.jar -d /diretorio/onde/estao/os/afcs
+```
+
+A opção `-d` deve ser utilizada para informar o diretório onde estão os arquivos `.afc` que serão convertidos em `.md`. Caso essa opção seja omitida, será considerado o diretório corrente.
+
+E pronto! Os arquivos `.md` devem ter sido gerados! 
+
+Também devem ter sido gerados como arquivos auxiliares como `package.json`, `book.json`, `cover.jpg`, `.bookignore` e `.gitignore`. Todos são arquivos importantes para o [Gitbook](https://github.com/GitbookIO/gitbook).
+
+### Usando o Gitbook
+
+Para informaçoes sobre como usar o Gitbook para gerar um site ou ebooks nos formatos `.pdf`, `.mobi` ou `.epub`, veja: 
+https://github.com/casadocodigo/gitbook-plugin-cdc
 
 ## Conversões realizadas
 
+Os arquivos `.afc` do diretório informado são ordenados por nome de arquivo.
+
+O primeiro arquivo é renomeado para `README.md`. Também é gerado o arquivo `SUMMARY.md`, que contém referências para todos os outros arquivos. Ambos são padrões do [Gitbook](https://github.com/GitbookIO/gitbook) na versão 1.5.0.
+
 São feitas as seguintes conversões:
 
-* Parágrafos normais não podem ter mais de um nível de _TAB_.
 * Definições de capítulos como `[chapter Eclipse IDE]` são removidas do arquivo `.md` gerado (p. ex. `08-eclipse.md`) e é inserida a linha `* [Eclipse IDE](08-eclipse.md)` no `SUMMARY.md`
 * Seções como `[section Como aprender Java?]` viram `## Como aprender Java?`
 * Títulos como `[title Aprendendo a aprender]` viram `### Aprendendo a aprender`
@@ -26,7 +55,6 @@ São feitas as seguintes conversões:
     -->
    ```
 * Citações como `[quote "Olho por olho, eo mundo acabará cego." -- Ghandi]` viram `_"Olho por olho, eo mundo acabará cego." -- Ghandi_`
-
 * Uma lista do tipo
   ```
     [list]
@@ -72,7 +100,6 @@ Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não 
         42
     -->
     ```
-
 * Caixas de texto como
     ```
     [box Git e Github são a mesma coisa?]
@@ -105,6 +132,8 @@ Se houver um rótulo para o box, como no exemplo anterior, a primeira linha cont
     ``` _
     ```
 Os _TAB_ dentro do bloco de código sempre são mantido. Linhas destacadas com `[code h=3]` não são suportadas.
+* Parágrafos normais: não podem ter mais de um nível de _TAB_.
+
 
 Não há suporte a:
 
