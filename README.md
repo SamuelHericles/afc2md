@@ -100,7 +100,8 @@ Se houver um rótulo para o box, como no exemplo anterior, a primeira linha cont
             public static void main(String... args){
             }
         }
-    ```    ```
+    ``` _
+    ```
 Os _TAB_ dentro do bloco de código sempre são mantido. Linhas destacadas com `[code h=3]` não são suportadas.
 
 Não há suporte a:
