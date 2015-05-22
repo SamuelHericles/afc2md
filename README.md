@@ -3,6 +3,7 @@ Conversor de `.afc` (Tubaina) para `.md` (Markdown).
 
 São feitas as seguintes conversões:
 
+* Parágrafos normais não podem ter mais de um nível de _TAB_.
 * Definições de capítulos como `[chapter Eclipse IDE]` são removidas do arquivo `.md` gerado (p. ex. `08-eclipse.md`) e é inserida a linha `* [Eclipse IDE](08-eclipse.md)` no `SUMMARY.md`
 * Seções como `[section Como aprender Java?]` viram `## Como aprender Java?`
 * Títulos como `[title Aprendendo a aprender]` viram `### Aprendendo a aprender`
@@ -69,6 +70,19 @@ Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não 
         42
     -->
     ```
+
+* Caixas de texto como
+    ```
+    [box Git e Github são a mesma coisa?]
+        Não.
+    [/box]
+    ```
+    viram
+    ```
+    > **Git e Github são a mesma coisa?**
+    > Não.
+    ```
+Se houver um rótulo para o box, como no exemplo anterior, a primeira linha contém o rótulo em negrito. Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não pode existir mais de um _ENTER_ entre as linhas do box. Dois box consecutivos devem ser separados com um comentário HTML, para não serem unificados.
 * Código como 
     ```
     [code java]
@@ -88,19 +102,6 @@ Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não 
         }
     ```    ```
 Os _TAB_ dentro do bloco de código sempre são mantido. Linhas destacadas com `[code h=3]` não são suportadas.
-* Caixas de texto como
-    ```
-    [box Git e Github são a mesma coisa?]
-        Não.
-    [/box]
-    ```
-    viram
-    ```
-    > **Git e Github são a mesma coisa?**
-    > Não.
-    ```
-Se houver um rótulo para o box, como no exemplo anterior, a primeira linha contém o rótulo em negrito. Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não pode existir mais de um _ENTER_ entre as linhas do box. Dois box consecutivos devem ser separados com um comentário HTML, para não serem unificados.
-* Parágrafos normais não podem ter mais de um nível de _TAB_.
 
 Não há suporte a:
 
