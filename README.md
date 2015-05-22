@@ -1,6 +1,8 @@
 # afc2md
 Conversor de `.afc` (Tubaina) para `.md` (Markdown).
 
+## Conversões realizadas
+
 São feitas as seguintes conversões:
 
 * Parágrafos normais não podem ter mais de um nível de _TAB_.
