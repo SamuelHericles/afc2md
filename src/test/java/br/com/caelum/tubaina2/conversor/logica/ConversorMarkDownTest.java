@@ -57,46 +57,36 @@ public class ConversorMarkDownTest {
 
 	@Test
 	public void notesComCodeEInlineCode() throws IOException, URISyntaxException {
-		String afc = "notes_com_code_e_inline_code.afc";
-		String md = "notes_com_code_e_inline_code.md";
-		verificaConversaoDeAFCemMD(afc, md);
+		verificaConversaoDeAFCemMD("notes_com_code_e_inline_code");
 	}
 
 	@Test
 	public void exerciseQuestionsEAnswers() throws IOException, URISyntaxException {
-		String afc = "exercise_questions_e_answers.afc";
-		String md = "exercise_questions_e_answers.md";
-		verificaConversaoDeAFCemMD(afc, md);
+		verificaConversaoDeAFCemMD("exercise_questions_e_answers");
 	}
 	
 	@Test
 	public void exerciseComQuestionsEmVariasLinhas() throws IOException, URISyntaxException {
-		String afc = "exercise_com_questions_em_varias_linhas.afc";
-		String md = "exercise_com_questions_em_varias_linhas.md";
-		verificaConversaoDeAFCemMD(afc, md);
+		verificaConversaoDeAFCemMD("exercise_com_questions_em_varias_linhas");
 	}
 	
 	@Test
 	public void codeEmUmaLinhaComTabsDentroDeQuestions() throws IOException, URISyntaxException {
-		String afc = "texto_com_tabs_code_em_uma_linha_e_em_varias_linhas.afc";
-		String md = "texto_com_tabs_code_em_uma_linha_e_em_varias_linhas.md";
-		verificaConversaoDeAFCemMD(afc, md);
+		verificaConversaoDeAFCemMD("texto_com_tabs_code_em_uma_linha_e_em_varias_linhas");
 	}
 
 	@Test
 	public void variosBoxesConsecutivosComVariasLinhasECode() throws IOException, URISyntaxException {
-		String afc = "varios_boxes_consecutivos_com_varias_linhas_e_code.afc";
-		String md = "varios_boxes_consecutivos_com_varias_linhas_e_code.md";
-		verificaConversaoDeAFCemMD(afc, md);
+		verificaConversaoDeAFCemMD("varios_boxes_consecutivos_com_varias_linhas_e_code");
 	}
 	
-	private void verificaConversaoDeAFCemMD(String arquivoAFC, String arquivoMD) throws URISyntaxException, IOException{
-		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivoAFC);
+	private void verificaConversaoDeAFCemMD(String arquivo) throws URISyntaxException, IOException{
+		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivo+".afc");
 		
 		MarkDown md = conversor.converte(afc);
 		String conteudoMD = md.conteudo();
 
-		String conteudoEsperadoMD = obtemMdEsperadoDoArquivo("/exemplos/md/"+arquivoMD);
+		String conteudoEsperadoMD = obtemMdEsperadoDoArquivo("/exemplos/md/"+arquivo+".md");
 		Assert.assertEquals(conteudoEsperadoMD, conteudoMD);
 	}
 

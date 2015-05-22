@@ -4,7 +4,7 @@ public class ConversorDeAnswer implements ConversorDeSintaxe {
 
 	@Override
 	public String converte(String sintaxe) {
-		return sintaxe.replaceAll("(?is)[ \t]*\\[ANSWER\\](.*?)\\[/ANSWER\\]\\s*", "");
+		return sintaxe.replaceAll("(?is)([ \t]*)\\[ANSWER\\](.*?)\\[/ANSWER\\]\\s*", "$1<!-- @answer $2 -->\n");
 	}
 
 }
