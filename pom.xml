@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<name>afc2md</name>
 
-	<description>Tubaina .afc to Gitbook Markdown (.md)</description>
+	<description>Conversor de Tubaína (.afc) para Markdown (.md)</description>
 	<url>https://github.com/caelum/afc2md</url>
 
 	<organization>
