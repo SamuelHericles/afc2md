@@ -4,4 +4,6 @@ bin
 *.class
 /test-classes
 *.jar
-livro-teste/
+.classpath
+.project
+.settings
