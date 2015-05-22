@@ -19,7 +19,7 @@ public class ConversorDeNoteTest {
 		
 		String convertido = conversor.converte(nota);
 		
-		String esperado =   "<!--Mostre também a solução com soma de progressão aritmética.-->";
+		String esperado =   "<!-- @note Mostre também a solução com soma de progressão aritmética. -->";
 		
 		Assert.assertEquals(esperado, convertido);
 	}
@@ -34,11 +34,11 @@ public class ConversorDeNoteTest {
 
 	String convertido = conversor.converte(nota);
 	
-	String esperado = "	<!--\n"+
+	String esperado = "	<!-- @note \n"+
 					  "		A analogia da folha de papel é ::killer:: :). Dá para usar fácil na aula com \n"+ 
 					  "		desenhos. E é a melhor forma de explicar templates que achei (baseado no livro \n"+
 					  "		de JSF2 :)). Adriano\n"+
-					  "	-->\n";
+					  "	 -->\n";
 	
 	Assert.assertEquals(esperado, convertido);
 	}
