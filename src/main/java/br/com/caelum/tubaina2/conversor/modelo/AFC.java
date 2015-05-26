@@ -6,12 +6,10 @@ public class AFC {
 
 	private final Path path;
 	private final String conteudo;
-	private final boolean primeiro;
 	
-	public AFC(Path path, String conteudo, boolean primeiro) {
+	public AFC(Path path, String conteudo) {
 		this.path = path;
 		this.conteudo = conteudo;
-		this.primeiro = primeiro;
 	}
 
 	public Path path() {
@@ -22,8 +20,4 @@ public class AFC {
 		return conteudo;
 	}
 
-	public boolean primeiro() {
-		return primeiro;
-	}
-	
 }

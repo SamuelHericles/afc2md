@@ -29,13 +29,9 @@ https://github.com/casadocodigo/gitbook-plugin-cdc
 
 ## Conversões realizadas
 
-Os arquivos `.afc` do diretório informado são ordenados por nome de arquivo.
-
-O primeiro arquivo é renomeado para `README.md`. Também é gerado o arquivo `SUMMARY.md`, que contém referências para todos os outros arquivos. Ambos são padrões do [Gitbook](https://github.com/GitbookIO/gitbook) na versão 1.5.0.
-
 São feitas as seguintes conversões:
 
-* Definições de capítulos como `[chapter Eclipse IDE]` são removidas do arquivo `.md` gerado (p. ex. `08-eclipse.md`) e é inserida a linha `* [Eclipse IDE](08-eclipse.md)` no `SUMMARY.md`
+* Capítulos como `[chapter Eclipse IDE]` viram `# Eclipse IDE`
 
 * Seções como `[section Como aprender Java?]` viram `## Como aprender Java?`
 

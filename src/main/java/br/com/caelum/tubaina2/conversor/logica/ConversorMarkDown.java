@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeAnswer;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeBox;
@@ -60,12 +58,11 @@ public class ConversorMarkDown {
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
 		
-		String titulo = descobreTitulo(conteudoAFC);
 		Path pathMD = descobrePath(afc);
 
 		String conteudoMD = converteConteudo(conteudoAFC);
 		
-		return new MarkDown(pathMD, conteudoMD, titulo);
+		return new MarkDown(pathMD, conteudoMD);
 	}
 
 	private String converteConteudo(String conteudoAFC) {
@@ -76,24 +73,8 @@ public class ConversorMarkDown {
 		return conteudoMD;
 	}
 
-	private String descobreTitulo(String conteudo) {
-		Matcher matcher = Pattern.compile(ConversorDeChapter.REGEX_CHAPTER).matcher(conteudo);
-		if(matcher.find() && matcher.groupCount() >= 1) {
-			String titulo = matcher.group(1);
-			if(titulo != null && !titulo.isEmpty()) {
-				return titulo.trim();
-			} 
-		}
-		return "Capítulo sem título";
-	}
-
 	private Path descobrePath(AFC afc) {
-		Path path = afc.path();
-		if(afc.primeiro()){
-			return path.getParent().resolve("README.md");
-		} else {
-			return Paths.get(path.toString().replace(".afc", ".md"));
-		}
+		return Paths.get(afc.path().toString().replace(".afc", ".md"));
 	}
 
 }

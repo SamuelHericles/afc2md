@@ -21,7 +21,6 @@ import java.util.List;
 
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
 import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
-import br.com.caelum.tubaina2.conversor.modelo.Summary;
 
 public class Diretorio {
 
@@ -45,12 +44,6 @@ public class Diretorio {
 		Files.write(md.path(), md.conteudo().getBytes());
 	}
 	
-	public void criaSummaryMD(Summary summary) throws IOException{
-		Path path = diretorio.resolve(Summary.NOME_MD);
-		MarkDown summaryMD = new MarkDown(path, summary.conteudo(), Summary.TITULO_MD);
-		criaArquivoMD(summaryMD);
-	}
-
 	public void copiaArquivosEstaticos() throws IOException, URISyntaxException {
 		Path arquivos = getResourceAsPath("/arquivos");
 		copiaTodosOsArquivos(arquivos);
@@ -75,12 +68,10 @@ public class Diretorio {
 	}
 	
 	private void criaAFCs(List<AFC> afcs, File[] files) throws IOException {
-		boolean primeiro = true;
 		for (File file : files) {
 			Path path = Paths.get(file.getAbsolutePath());
 			String conteudo = getPathContents(path);
-			afcs.add(new AFC(path, conteudo, primeiro));
-			primeiro = false;
+			afcs.add(new AFC(path, conteudo));
 		}
 	}
 

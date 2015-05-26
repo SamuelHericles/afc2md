@@ -4,7 +4,6 @@ package br.com.caelum.tubaina2.conversor.logica;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,39 +19,6 @@ public class ConversorMarkDownTest {
 	@Before
 	public void setUp(){
 		conversor = new ConversorMarkDown();
-	}
-
-	@Test
-	public void obtemTituloEmUmaLinha() throws IOException {
-		String conteudoAFC = "[chapter AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
-
-		MarkDown md = conversor.converte(afc);
-		
-		String titulo = md.titulo();
-		Assert.assertEquals("AJAX com JSF 2", titulo);
-	}
-
-	@Test
-	public void obtemTituloComEspacosNaFrente() throws IOException {
-		String conteudoAFC = "[chapter       AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
-
-		MarkDown md = conversor.converte(afc);
-		
-		String titulo = md.titulo();
-		Assert.assertEquals("AJAX com JSF 2", titulo);
-	}
-
-	@Test
-	public void obtemTituloComQuebraDeLinhaTabsEEspacosNaFrente() throws IOException {
-		String conteudoAFC = "[chapter\n   \t\t \n   AJAX com JSF 2]\n";
-		AFC afc = new AFC(Paths.get(""), conteudoAFC, false);
-
-		MarkDown md = conversor.converte(afc);
-		
-		String titulo = md.titulo();
-		Assert.assertEquals("AJAX com JSF 2", titulo);
 	}
 
 	@Test
@@ -93,7 +59,7 @@ public class ConversorMarkDownTest {
 	private AFC criaAfcAPartirDoArquivo(String nomeAFC) throws URISyntaxException, IOException {
 		Path pathAFC = Diretorio.getResourceAsPath(nomeAFC);
 		String conteudoAFC = Diretorio.getPathContents(pathAFC);
-		return new AFC(pathAFC, conteudoAFC, false);
+		return new AFC(pathAFC, conteudoAFC);
 	}
 
 	private String obtemMdEsperadoDoArquivo(String nomeMD) throws URISyntaxException, IOException {

@@ -1,4 +1,4 @@
-
+# O que é Java
 _"Computadores são inúteis, eles apenas dão respostas" -- Picasso_
 
 ## Compilando o primeiro programa

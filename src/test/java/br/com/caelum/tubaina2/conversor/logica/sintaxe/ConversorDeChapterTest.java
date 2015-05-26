@@ -15,27 +15,27 @@ public class ConversorDeChapterTest {
 
 	@Test
 	public void emUmaLinha() {
-		Assert.assertEquals("", conversor.converte("[chapter Eclipse IDE]"));
+		Assert.assertEquals("# Eclipse IDE", conversor.converte("[chapter Eclipse IDE]"));
 	}
 
 	@Test
 	public void maiusculo() {
-		Assert.assertEquals("", conversor.converte("[CHAPTER Templates com Facelets]"));
+		Assert.assertEquals("# Templates com Facelets", conversor.converte("[CHAPTER Templates com Facelets]"));
 	}
 
 	@Test
 	public void emMaisDeUmaLinha() {
-		Assert.assertEquals("", conversor.converte("[chapter Apêndice\n - Problemas com concorrência]"));
+		Assert.assertEquals("# Apêndice\n - Problemas com concorrência", conversor.converte("[chapter Apêndice\n - Problemas com concorrência]"));
 	}
 	
 	@Test
 	public void comEspacosNaFrente() {
-		Assert.assertEquals("", conversor.converte("[chapter            Ajax com JSF 2]"));
+		Assert.assertEquals("# Ajax com JSF 2", conversor.converte("[chapter            Ajax com JSF 2]"));
 	}
 
 	@Test
 	public void comQuebraDeLinhaTabsEEspacosNaFrente() {
-		Assert.assertEquals("", conversor.converte("[chapter\n   \t\t \n   Apêndice - Internacionalização: sua aplicação em várias línguas]"));
+		Assert.assertEquals("# Apêndice - Internacionalização: sua aplicação em várias línguas", conversor.converte("[chapter\n   \t\t \n   Apêndice - Internacionalização: sua aplicação em várias línguas]"));
 	}
 
 }
