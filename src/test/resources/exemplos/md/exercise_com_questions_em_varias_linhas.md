@@ -39,7 +39,7 @@ _"Nem todos os caminhos são para todos os caminhantes" -- Johann Wolfgang von G
 1. Verifique o código fonte gerado pela página. Repare que não é nada mais que simples HTML.
 
 
-<!-- @note
+<!--@note
 No exercício, faça eles verem o código fonte HTML da pagina inicialmente, aí
 preencha a caixa de texto e clique no botão. Observar que os dados são
 mantidos. Aí abre-se o HTML depois do submit e observa-se o value no source.

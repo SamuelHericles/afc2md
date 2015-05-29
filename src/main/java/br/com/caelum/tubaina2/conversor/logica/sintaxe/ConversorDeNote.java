@@ -4,7 +4,7 @@ public class ConversorDeNote implements ConversorDeSintaxe {
 
 	private static final String REGEX_ABERTURA_NOTE = "\\[note\\]";
 	private static final String REGEX_FECHAMENTO_NOTE = "\\[/note\\]";
-	private static final String REPLACEMENT_ABERTURA_NOTE = "<!-- @note ";
+	private static final String REPLACEMENT_ABERTURA_NOTE = "<!--@note ";
 	private static final String REPLACEMENT_FECHAMENTO_NOTE = " -->";
 
 	@Override
