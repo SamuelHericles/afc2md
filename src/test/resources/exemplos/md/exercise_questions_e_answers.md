@@ -2,7 +2,7 @@
 
 ## Exercícios: Modificando o Hello World
 1. Altere seu programa para imprimir uma mensagem diferente.
-	<!-- @answer
+	<!--@answer
 	``` java
 			class MeuProgramaModificado {
 				public static void main(String[] args) {
@@ -14,7 +14,7 @@
 	```
 	-->
 1. Altere seu programa para imprimir duas linhas de texto usando duas linhas de código System.out.
-	<!-- @answer
+	<!--@answer
 	``` java
 			class MeuProgramaModificado {
 				public static void main(String[] args) {

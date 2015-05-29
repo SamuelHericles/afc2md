@@ -22,7 +22,7 @@ public class ConversorDeAnswerTest {
 		String convertido = conversor.converte(questao);
 		String esperado = "[question]\n"+
 							"Compile e verifique o nome do arquivo gerado.\n"+
-							"<!-- @answer O arquivo %%.class%% gerado tem o nome da classe em si. -->\n"+
+							"<!--@answer O arquivo %%.class%% gerado tem o nome da classe em si. -->\n"+
 						  "[/question]\n";
 		Assert.assertEquals(esperado, convertido);
 	}
@@ -40,7 +40,7 @@ public class ConversorDeAnswerTest {
 		String convertido = conversor.converte(questao);
 		String esperado = "[question]\n"+
 							"Compile e verifique o nome do arquivo gerado. Como executar a sua aplicação?\n"+
-							"<!-- @answer \n"
+							"<!--@answer \n"
 							+ "O arquivo %%.class%% gerado tem o nome da classe em si.\n"
 							+ "Para executar, rode %%java NomeDaClasse%%.\n"
 							+ " -->\n"+
@@ -65,7 +65,7 @@ public class ConversorDeAnswerTest {
 		String convertido = conversor.converte(questao);
 		String esperado = "[question]\n"+
 						 "		Altere seu programa para imprimir uma mensagem diferente.\n"+
-						 "		<!-- @answer \n"+
+						 "		<!--@answer \n"+
 						 "			[code java]\n"+
 						 "				class MeuProgramaModificado {\n"+
 						 "					public static void main(String[] args) {\n"+
