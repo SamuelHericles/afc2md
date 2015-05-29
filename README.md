@@ -1,5 +1,5 @@
 # afc2md
-Conversor de `.afc` (Tubaina) para `.md` (Markdown) no _sabor_ do [Gitbook](https://github.com/GitbookIO/gitbook), com algumas pitadas do plugin [gitbook-plugin-cdc](https://github.com/casadocodigo/gitbook-plugin-cdc).
+Conversor de `.afc` (Tubaina) para `.md` (Markdown) no _sabor_ do [Gitbook](https://github.com/GitbookIO/gitbook), com algumas pitadas do plugin [gitbook-plugin-cdc](https://github.com/casadocodigo/gitbook-plugin-cdc). Pronto para ser usado com o [tubaina2](https://github.com/caelum/tubaina2).
 
 ## Como executar
 
@@ -20,12 +20,12 @@ A opção `-d` deve ser utilizada para informar o diretório onde estão os arqu
 
 E pronto! Os arquivos `.md` devem ter sido gerados! 
 
-Também devem ter sido gerados como arquivos auxiliares como `package.json`, `book.json`, `cover.jpg`, `.bookignore` e `.gitignore`. Todos são arquivos importantes para o [Gitbook](https://github.com/GitbookIO/gitbook).
+Também devem ter sido gerados como arquivos auxiliares como `package.json`, `book.properties`, `cover.jpg`, `.bookignore` e `.gitignore`. Todos são arquivos importantes para o [tubaina2](https://github.com/caelum/tubaina2).
 
-### Usando o Gitbook
+### Usando o tubaina2
 
-Para informaçoes sobre como usar o Gitbook para gerar um site ou ebooks nos formatos `.pdf`, `.mobi` ou `.epub`, veja: 
-https://github.com/casadocodigo/gitbook-plugin-cdc
+Para informaçoes sobre como usar o tubaina2 para gerar um site ou ebooks nos formatos `.pdf`, `.mobi` ou `.epub`, veja: 
+https://github.com/caelum/tubaina2
 
 ## Conversões realizadas
 
@@ -43,7 +43,7 @@ São feitas as seguintes conversões:
 
 * Imagens como `[img imagens/logo.png w=80% "Logo da empresa"]` viram `![Logo da empresa {w=90%}](imagens/logo.png)`
 
-* Tarefas como `[TODO melhorar texto]` viram `<!-- @todo melhorar texto -->`
+* Tarefas como `[TODO melhorar texto]` viram `<!--@todo melhorar texto -->`
 
 * Notas para instrutores como 
   ```
@@ -53,7 +53,7 @@ São feitas as seguintes conversões:
    ``` 
    viram  
    ```
-   <!-- @note 
+   <!--@note 
    Mostre também a outra solução.
     -->
    ```
@@ -104,7 +104,7 @@ Linhas consecutivas mantém apenas um nível de _TAB_, exceto em códigos. Não 
     ``` 
     viram 
     ```
-    <!-- @answer 
+    <!--@answer 
         42
     -->
     ```
