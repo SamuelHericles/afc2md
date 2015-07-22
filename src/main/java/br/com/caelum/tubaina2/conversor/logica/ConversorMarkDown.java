@@ -1,8 +1,6 @@
 package br.com.caelum.tubaina2.conversor.logica;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +29,8 @@ import br.com.caelum.tubaina2.conversor.modelo.MarkDown;
 
 public class ConversorMarkDown {
 	
+	private int numeroCapituloAtual = 1;
+
 	private List<ConversorDeSintaxe> conversores = new ArrayList<>();
 	
 	public ConversorMarkDown() {
@@ -57,12 +57,16 @@ public class ConversorMarkDown {
 	
 	public MarkDown converte(AFC afc) throws IOException {
 		String conteudoAFC = afc.conteudo();
-		
-		Path pathMD = descobrePath(afc);
+
+		String tituloMD = ConversorDeChapter.titulo(conteudoAFC);
 
 		String conteudoMD = converteConteudo(conteudoAFC);
 		
-		return new MarkDown(pathMD, conteudoMD);
+		MarkDown markDown = new MarkDown(numeroCapituloAtual, tituloMD, conteudoMD);
+
+		numeroCapituloAtual++;
+
+		return markDown;
 	}
 
 	private String converteConteudo(String conteudoAFC) {
@@ -71,10 +75,6 @@ public class ConversorMarkDown {
 			conteudoMD = conversor.converte(conteudoMD);
 		}
 		return conteudoMD;
-	}
-
-	private Path descobrePath(AFC afc) {
-		return Paths.get(afc.path().toString().replace(".afc", ".md"));
 	}
 
 }

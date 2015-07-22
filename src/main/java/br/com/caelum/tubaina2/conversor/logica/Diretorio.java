@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,7 +42,8 @@ public class Diretorio {
 	}
 
 	public void criaArquivoMD(MarkDown md) throws IOException {
-		Files.write(md.path(), md.conteudo().getBytes());
+		Path path = diretorio.resolve(String.format("%02d", md.numero())+"-"+filename(md.titulo())+".md");
+		Files.write(path, md.conteudo().getBytes());
 	}
 	
 	public void copiaArquivosEstaticos() throws IOException, URISyntaxException {
@@ -97,6 +99,15 @@ public class Diretorio {
 		});
 	}
 	
+	public static String filename(String title){
+		return Normalizer.normalize(title, Normalizer.Form.NFD)
+			.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "")
+			.toLowerCase()
+			.replaceAll("[\\p{Punct}]", " ")
+			.trim()
+			.replaceAll("\\s+", "-");
+	}
+
 	public static Path getResourceAsPath(String resource) throws URISyntaxException, IOException {
 		URI uri = Diretorio.class.getResource(resource).toURI();
 		if(isResourceInJar(uri)){
