@@ -45,6 +45,12 @@ public class ConversorMarkDownTest {
 	public void variosBoxesConsecutivosComVariasLinhasECode() throws IOException, URISyntaxException {
 		verificaConversaoDeAFCemMD("varios_boxes_consecutivos_com_varias_linhas_e_code");
 	}
+
+	@Test
+	public void textoComImgSeguidoPorIndex() throws IOException, URISyntaxException {
+		verificaConversaoDeAFCemMD("texto_com_img_seguido_por_index");
+	}
+
 	
 	private void verificaConversaoDeAFCemMD(String arquivo) throws URISyntaxException, IOException{
 		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivo+".afc");

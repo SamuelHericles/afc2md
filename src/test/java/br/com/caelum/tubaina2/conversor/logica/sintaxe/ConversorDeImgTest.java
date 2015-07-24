@@ -12,7 +12,7 @@ public class ConversorDeImgTest {
 	public void setUp() {
 		conversor = new ConversorDeImg();
 	}
-	
+
 	@Test
 	public void emUmaLinha(){
 		String sintaxe = "[img imagens/projeto/novas/new_server_glassfish4_01.png]";
@@ -138,7 +138,6 @@ public class ConversorDeImgTest {
 						 "![Selecionando plano no GitHub {w=80}](imagens/cap2/finish_signup.png)\n";
 		Assert.assertEquals(esperado, convertido);
 	}
-	
 
 	@Test
 	public void comLabel(){
@@ -148,6 +147,25 @@ public class ConversorDeImgTest {
 		
 		String esperado = "![Repare que a fonte do texto que estamos querendo destacar está menor que a fonte desta frase. É um forte indicativo de que será impossível de ler na versão impressa. {w=90%}](imagens/fonte_pequena.png)";
 		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void algoTerminandoEmColchetesLogoAbaixo(){
+		String sintaxe = "[img images/debug_java8/break-point.png]\n" +
+						 "\n" +
+						 "Esse é o tipo mais clássico de breakpoint, veremos alguns outros ao longo do capítulo.\n" +
+						 "\n" +
+						 "[index Começando o debug]\n";
+		
+		String convertido = conversor.converte(sintaxe);
+		
+		String esperado = "![](images/debug_java8/break-point.png)\n" +
+						 "\n" +
+						 "Esse é o tipo mais clássico de breakpoint, veremos alguns outros ao longo do capítulo.\n" +
+						 "\n" +
+						 "[index Começando o debug]\n";
+
 		Assert.assertEquals(esperado, convertido);
 	}
 
