@@ -22,6 +22,7 @@ import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeQuote;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeRefLabel;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeSection;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeSintaxe;
+import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeTable;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeTitle;
 import br.com.caelum.tubaina2.conversor.logica.sintaxe.ConversorDeTodo;
 import br.com.caelum.tubaina2.conversor.modelo.AFC;
@@ -53,6 +54,7 @@ public class ConversorMarkDown {
 		conversores.add(new ConversorDeParagrafo());
 		conversores.add(new ConversorDeExercise());
 		conversores.add(new ConversorDeQuestion());
+		conversores.add(new ConversorDeTable());
 	}
 	
 	public MarkDown converte(AFC afc) throws IOException {
