@@ -76,6 +76,44 @@ public class ConversorDeCodeTest {
 	}
 
 	@Test
+	public void removeHighlightSemSinalDeIgual() {
+		String codigo = "[code java h 3]\n" +
+						"    CriteriaBuilder builder = em.getCriteriaBuilder();\n" +
+						"    CriteriaQuery<Movimentacao> criteria = builder.createQuery(Movimentacao.class);\n" +
+						"    criteria.from(Movimentacao.class);\n" +
+						"[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado = "``` java\n" +
+						"    CriteriaBuilder builder = em.getCriteriaBuilder();\n" +
+						"    CriteriaQuery<Movimentacao> criteria = builder.createQuery(Movimentacao.class);\n" +
+						"    criteria.from(Movimentacao.class);\n" +
+						"```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+
+	@Test
+	public void removeHighlightSemSinalDeIgualNemEspaco() {
+		String codigo = "[code java h3]\n" +
+						"	//no JPQL select m.valor ...\n" +
+						"	Path<BigDecimal> caminho = root.<BigDecimal>get(\"valor\");\n" +
+						"	criteria.select(caminho);\n" +
+						"[/code]";
+		
+		String convertido = conversor.converte(codigo);
+		
+		String esperado = "``` java\n" +
+						"	//no JPQL select m.valor ...\n" +
+						"	Path<BigDecimal> caminho = root.<BigDecimal>get(\"valor\");\n" +
+						"	criteria.select(caminho);\n" +
+						"```";
+		
+		Assert.assertEquals(esperado, convertido);
+	}
+	
+	@Test
 	public void naoRemoverHForaDeCode() {
 		String trecho = "O namespace padrão dos componentes JSF é "
 						+ "%%xmlns:h=\"http://java.sun.com/jsf/html\"%% e "
@@ -131,4 +169,6 @@ public class ConversorDeCodeTest {
 		
 		Assert.assertEquals(esperado, convertido);
 	}
+
 }
+

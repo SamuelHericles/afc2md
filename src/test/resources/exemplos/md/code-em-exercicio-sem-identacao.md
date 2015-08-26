@@ -8,14 +8,14 @@
 	`@ManyToMany`.
 
 	``` java
-	@Entity
-	public class Movimentacao {
-	    //outros atributos...
+ @Entity
+ public class Movimentacao {
+    //outros atributos...
 
-	    @ManyToMany
-	    private List<Categoria> categorias = new ArrayList<Categoria>();
+    @ManyToMany
+    private List<Categoria> categorias = new ArrayList<Categoria>();
 
-	}
+ }
 	```
 
 	Não esqueça dos getters e setters do novo atributo.
@@ -35,21 +35,21 @@
 	`@PersistenceContext`:
 
 	``` java
-	package br.com.caelum.financas.dao;
+ package br.com.caelum.financas.dao;
 
-	@Stateless
-	public class CategoriaDao implements Serializable {
+ @Stateless
+ public class CategoriaDao implements Serializable {
 
-	    @PersistenceContext
-	    private EntityManager manager;
+    @PersistenceContext
+    private EntityManager manager;
 
-	    public Categoria procura(Integer id) {
-	        //busca pela id
-	    }
+    public Categoria procura(Integer id) {
+        //busca pela id
+    }
 
-	    public List<Categoria> lista() {
-	        //retorna todas as categorias
-	    }
+    public List<Categoria> lista() {
+        //retorna todas as categorias
+    }
 
-	}
+ }
 	```

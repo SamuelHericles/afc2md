@@ -2,7 +2,7 @@ package br.com.caelum.tubaina2.conversor.logica.sintaxe;
 
 public class ConversorDeCode implements ConversorDeSintaxe {
 
-	private static final String REGEX_HIGHLIGHT = "(?i)\\[code(.*)\\s+h=.*\\]";
+	private static final String REGEX_HIGHLIGHT = "(?i)\\[code(.*)\\s+h=?\\s?\\d+?.*\\]";
 	private static final String REPLACEMENT_HIGHLIGHT = "\\[code$1\\]";
 
 	private static final String REGEX_CERQUILHA = "(?i)\\[code(.*)\\s+#\\]";

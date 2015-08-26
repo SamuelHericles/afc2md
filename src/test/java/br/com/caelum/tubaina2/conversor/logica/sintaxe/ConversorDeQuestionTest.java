@@ -240,11 +240,11 @@ public class ConversorDeQuestionTest {
 				"1. Altere seu programa para imprimir uma mensagem diferente.\n"+
 				"	Por exemplo, faça:\n"+
 				"	``` java\n"+
-				"	class MeuProgramaModificado {\n"+
-				"	    public static void main(String[] args) {\n"+
-				"	        System.out.println(\"Uma mensagem diferente.\");\n"+
-				"	    }\n"+
-				"	}\n"+
+				" class MeuProgramaModificado {\n"+
+				"    public static void main(String[] args) {\n"+
+				"        System.out.println(\"Uma mensagem diferente.\");\n"+
+				"    }\n"+
+				" }\n"+
 				"	```\n"+
 				"	Rode e veja a mensagem alterada!\n";
 		Assert.assertEquals(esperado, convertido);
