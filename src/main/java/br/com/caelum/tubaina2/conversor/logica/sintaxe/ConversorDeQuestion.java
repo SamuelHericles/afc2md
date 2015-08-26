@@ -68,9 +68,13 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 		} else {
 			code.verificaSeEstaDentro(linha);
 			if(code.naoEstaDentroNemAbrindoNemFechando()) {
-				adicionaLinhaComApenasUmTabNaFrente(convertido, linha);
+				adicionaLinhaSemEspacosNasPontasComUmTabNaFrente(convertido, linha);
 			} else {
-				adicionaLinhaSemAlterar(convertido, linha);
+				if(code.dentro && !linha.startsWith(" ") && !linha.startsWith("\t")){
+					adicionaLinhaComUmEspacoNaFrente(convertido, linha);
+				} else {
+					adicionaLinhaSemAlterar(convertido, linha);
+				}
 			}
 			question.naoVazia();
 		}
@@ -80,12 +84,16 @@ public class ConversorDeQuestion implements ConversorDeSintaxe {
 		return linha.trim().isEmpty();
 	}
 
-	private StringBuilder adicionaLinhaComApenasUmTabNaFrente(StringBuilder convertido, String linha) {
+	private StringBuilder adicionaLinhaSemEspacosNasPontasComUmTabNaFrente(StringBuilder convertido, String linha) {
 		return convertido.append("\t" + linha.trim() + "\n");
 	}
 
 	private void adicionaPrimeiraLinhaDeQuestion(StringBuilder convertido, String linha) {
 		convertido.append("1. " + linha.trim() + "\n");
+	}
+
+	private void adicionaLinhaComUmEspacoNaFrente(StringBuilder convertido, String linha) {
+		convertido.append(" "+linha+"\n");
 	}
 
 	private void adicionaLinhaSemAlterar(StringBuilder convertido, String linha) {

@@ -51,6 +51,11 @@ public class ConversorMarkDownTest {
 		verificaConversaoDeAFCemMD("texto_com_img_seguido_por_index");
 	}
 
+	@Test
+	public void codeEmExercicioSemIdentacao() throws IOException, URISyntaxException {
+		verificaConversaoDeAFCemMD("code-em-exercicio-sem-identacao");
+	}
+	
 	
 	private void verificaConversaoDeAFCemMD(String arquivo) throws URISyntaxException, IOException{
 		AFC afc = criaAfcAPartirDoArquivo("/exemplos/afc/"+arquivo+".afc");
