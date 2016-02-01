@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
@@ -87,7 +88,11 @@ public class Diretorio {
 				Path absolutePath = file.toAbsolutePath();
 				Path relativePath = arquivos.relativize(absolutePath);
 				Path target = diretorio.resolve(relativePath.toString());
-				Files.copy(file, target, StandardCopyOption.REPLACE_EXISTING);
+				try {
+					Files.copy(file, target);
+				} catch (FileAlreadyExistsException ex) {
+					//se o arquivo ja existir, nao faz nada (nem sobreescreve)
+				}
 				return FileVisitResult.CONTINUE;
 			}
 			public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
