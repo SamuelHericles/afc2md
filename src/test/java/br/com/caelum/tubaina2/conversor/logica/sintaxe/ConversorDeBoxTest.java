@@ -14,6 +14,22 @@ public class ConversorDeBoxTest {
 	}
 
 	@Test
+	public void mesmaLinhaComTextoNormalASeguir() {
+		String box = "[box Médio - (7.1, 7.2, 7.5)][/box]\n" +
+					 "Para criar um programa Java, é preciso escrever um código fonte.";
+		
+		String esperado = "> **Médio - (7.1, 7.2, 7.5)**\n" +
+						  "> \n" +
+						  "\n" +
+						  "<!-- comentario para separar quotes adjacentes -->\n" +
+						  "\n" +
+						  "Para criar um programa Java, é preciso escrever um código fonte.\n";
+		
+		Assert.assertEquals(esperado, conversor.converte(box));
+	}
+	
+	
+	@Test
 	public void comTitulo() {
 		String box = "[box Git e GitHub sao a mesma coisa?]\n"+
 					  "	Não.\n"+

@@ -22,11 +22,16 @@ public class ConversorDeBox implements ConversorDeSintaxe {
 		for (String linha : linhas) {
 			code.emNovaLinha();
 			
-			if(box.estaAbrindoBox(linha)){
+			boolean abrindoBox = box.estaAbrindoBox(linha);
+			boolean fechandoBox = box.estaFechandoBox(linha);
+			if(abrindoBox){
 				trataAberturaBox(convertido);
-			} else if(box.estaFechandoBox(linha)){
+			}
+			if(fechandoBox){
 				trataFechamentoBox(convertido);
-			} else {
+			} 
+			
+			if(!abrindoBox && !fechandoBox){
 				trataTextoNormal(convertido, linha);
 			}
 		}
@@ -122,7 +127,7 @@ public class ConversorDeBox implements ConversorDeSintaxe {
 		}
 		
 		boolean estaFechandoBox(String linha){
-			return FECHAMENTO_BOX.equalsIgnoreCase(linha.trim());
+			return linha.trim().toLowerCase().endsWith(FECHAMENTO_BOX);
 		}
 		
 		boolean temTitulo(){
