@@ -42,5 +42,10 @@ public class ConversorDeLabelTest {
 	public void comQuebraDeLinhasTabsEEspacosNaFrente() {
 		Assert.assertEquals("", conversor.converte("[label\n  \t\t   \n    capitulo-remoto]"));
 	}
+	
+	@Test
+	public void labelComFechamento() {
+		Assert.assertEquals("**Lista Ligada**", conversor.converte("[label alguns textos se referem a essa estrutura como lista encadeada]**Lista Ligada**[/label]"));
+	}
 
 }
