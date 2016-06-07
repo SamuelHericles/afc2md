@@ -54,6 +54,23 @@ public class ConversorDeListTest {
 	}
 	
 	@Test
+	public void comNumberAoFechar() {
+		
+		String sintaxe =  "[list number]\n"+
+						  "	* Retirar e empilhar peça por peça do produto até chegar na peça defeituosa.\n"+
+						  "	* Retirar a peça defeituosa\n"+
+						  "[/list number]\n";
+		
+		String convertido = conversor.converte(sintaxe);
+		
+		String esperado = "\n"+
+						  "	* Retirar e empilhar peça por peça do produto até chegar na peça defeituosa.\n"+
+						  "	* Retirar a peça defeituosa\n"+
+						  "\n";
+		Assert.assertEquals(esperado, convertido);
+	}
+	
+	@Test
 	public void comLetter(){
 		String sintaxe =  "[list letter]\n"+
 						  "* Crie uma classe chamada %%BalancoTrimestral%% com um bloco main, como nos \n"+
